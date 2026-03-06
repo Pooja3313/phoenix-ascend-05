@@ -14,7 +14,7 @@
 ### 1. Header (Sticky)
 - **Top bar**: Orange background with email, phone, and LinkedIn icon (like Phoenix Accountancy)
 - **Main nav**: Logo on left, nav links: Home, About, Your Journey, then **5 service dropdowns** (Protection, Mortgage, Commercial Lending, Pensions, Wills & Estate Planning) with mega-menu sub-items matching WealthMax's structure
-- **Right side**: "Get a Quote" CTA button + **::: icon** that opens a **right sidebar drawer** with full contact details, social links, and additional info
+- **Right side**: "Contact Us" CTA button + **::: icon** that opens a **right sidebar drawer** with full contact details, social links, and additional info
 - **Sticky "Get in Touch"** tab on the right edge of the page (rotated text, always visible)
 
 ### 2. Welcome Popup (on load)
@@ -22,7 +22,7 @@
 - Styled with Phoenix Finserv orange branding, dismissible with X button
 
 ### 3. Home Page Sections (matching Phoenix Accountancy's layout)
-- **Hero section**: Full-width dark overlay image with bold headline ("Best Solution to Manage Your Finance and Accounting"), subtitle, and "Get a Quote" button. Odoo-style handwritten font with highlighter/underline decorations on key words
+- **Hero section**: Full-width dark overlay image with bold headline ("Best Solution to Manage Your Finance and Accounting"), subtitle, and "Contact Us" button. Odoo-style handwritten font with highlighter/underline decorations on key words
 - **Pillars of Values**: Integrity, Professionalism, Customer Focus cards with animated icons (icons move/bounce on hover, green background on hover matching logo). Using image icons + Lucide React icons
 - **Services overview**: Step-by-step service cards flowing down the page
 - **Testimonial section**: Quote card with avatar (Odoo-style with large quote marks)
@@ -45,7 +45,7 @@
 - Right sidebar slide-in animation for ::: menu
 
 ### 6. Code Structure
-- Clean React component architecture: `Header`, `Footer`, `HeroSection`, `ValuesSection`, `ServicesSection`, `TestimonialSection`, `WelcomePopup`, `RightSidebar`, `StickyGetInTouch`
+- Clean React component architecture: `Header`, `Footer`, `HeroSection`, `ValuesSection`, `ServicesSection`, `TestimonialSection`, `DiscountPopup`, `RightSidebar`, `StickyGetInTouch`
 - Tailwind CSS for all styling with custom theme colors (orange, green, gray)
 - Lucide React for icons + custom image icons where needed
 - Responsive design for all screen sizes

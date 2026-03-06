@@ -7,8 +7,8 @@ import PoundAnimation from "@/components/PoundAnimation";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import WelcomePopup from "@/components/WelcomePopup";
 import StickyGetInTouch from "@/components/StickyGetInTouch";
+import DiscountPopup from "@/components/DiscountPopup";
 
 const Index = () => {
   return (
@@ -24,7 +24,7 @@ const Index = () => {
         <CTASection />
       </main>
       <Footer />
-      <WelcomePopup />
+      <DiscountPopup />
       <StickyGetInTouch />
     </div>
   );

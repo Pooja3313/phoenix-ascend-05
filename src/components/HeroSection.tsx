@@ -39,7 +39,7 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap gap-4 animate-float-up" style={{ animationDelay: '0.7s' }}>
             <Button size="lg" className="bg-primary hover:bg-phoenix-orange-dark text-primary-foreground font-semibold text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all group">
-              Get a Quote
+              Contact Us
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
             </Button>
             <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-lg px-8 py-6">
