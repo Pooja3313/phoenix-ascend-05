@@ -4,21 +4,18 @@ import { useState } from "react";
 const Footer = () => {
   const [email, setEmail] = useState("");
 
-  const serviceLinks = [
-    "Protection", "Mortgage", "Commercial Lending", "Pensions", "Wills & Estate Planning",
-  ];
-
-  const quickLinks = [
-    "Home", "About Us", "Your Journey", "Blog", "Contact", "Privacy Policy", "Terms of Service",
-  ];
+  const serviceLinks = ["Protection", "Mortgage", "Commercial Lending", "Pensions", "Wills & Estate Planning"];
+  const quickLinks = ["Home", "About Us", "Your Journey", "Blog", "Contact", "Privacy Policy", "Terms of Service"];
 
   return (
     <footer className="relative bg-phoenix-gray-dark text-primary-foreground overflow-hidden">
-      {/* Glow line */}
-      <div className="glow-line h-0.5 bg-phoenix-gray/30" />
+      {/* Animated top line */}
+      <div className="glow-line h-1 bg-gradient-to-r from-primary via-accent to-phoenix-gold" />
 
-      {/* Secondary glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-primary/5 blur-3xl rounded-full" />
+      {/* Background effects */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-40 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-accent/3 blur-[80px] rounded-full pointer-events-none" />
+      <div className="absolute top-20 left-10 text-primary/[0.03] text-[200px] font-bold animate-pound-rotate select-none pointer-events-none">£</div>
 
       <div className="container mx-auto px-4 pt-16 pb-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
@@ -30,7 +27,7 @@ const Footer = () => {
               </div>
               <div>
                 <span className="font-bold text-lg">Phoenix Finserv</span>
-                <span className="block text-xs text-primary-foreground/50 italic">Helping secure dreams</span>
+                <span className="block text-xs text-primary-foreground/50 font-handwritten text-base">Helping secure dreams</span>
               </div>
             </div>
             <p className="text-sm text-primary-foreground/60 leading-relaxed mb-6">
@@ -38,11 +35,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-3">
               {[Linkedin, Facebook, Twitter, Instagram].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded-lg bg-primary-foreground/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 icon-hover-bounce"
-                >
+                <a key={i} href="#" className="w-9 h-9 rounded-lg bg-primary-foreground/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 icon-hover-bounce">
                   <Icon size={16} />
                 </a>
               ))}
@@ -51,7 +44,10 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="font-bold text-lg mb-5">Our Services</h3>
+            <h3 className="font-bold text-lg mb-5 relative inline-block">
+              Our Services
+              <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-primary rounded-full" />
+            </h3>
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
                 <li key={link}>
@@ -66,7 +62,10 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-5">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-5 relative inline-block">
+              Quick Links
+              <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-accent rounded-full" />
+            </h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link}>
@@ -81,7 +80,10 @@ const Footer = () => {
 
           {/* Contact & Newsletter */}
           <div>
-            <h3 className="font-bold text-lg mb-5">Contact Us</h3>
+            <h3 className="font-bold text-lg mb-5 relative inline-block">
+              Contact Us
+              <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-phoenix-gold rounded-full" />
+            </h3>
             <div className="space-y-4 mb-6">
               <a href="mailto:accountants@phoenix-accountancy.co.uk" className="flex items-start gap-3 text-sm text-primary-foreground/60 hover:text-primary transition-colors">
                 <Mail size={16} className="mt-0.5 shrink-0" />
@@ -115,12 +117,8 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="border-t border-primary-foreground/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-primary-foreground/40">
-            © {new Date().getFullYear()} Phoenix Finserv. All rights reserved.
-          </p>
-          <p className="text-xs text-primary-foreground/40">
-            Authorised and Regulated by the Financial Conduct Authority
-          </p>
+          <p className="text-xs text-primary-foreground/40">© {new Date().getFullYear()} Phoenix Finserv. All rights reserved.</p>
+          <p className="text-xs text-primary-foreground/40">Authorised and Regulated by the Financial Conduct Authority</p>
         </div>
       </div>
     </footer>
