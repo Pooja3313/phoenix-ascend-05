@@ -203,4 +203,12 @@
   .animate-pound-morph {
     animation: pound-morph 8s ease-in-out infinite;
   }
+
+  /* About section fallback */
+  .about-fallback-bg + .about-fallback-content {
+    display: flex;
+  }
+  .about-fallback-content {
+    /* Show only when image fails */
+  }
 }
