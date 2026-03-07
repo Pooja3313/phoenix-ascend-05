@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -16,12 +15,17 @@ const HeroSection = () => {
       <div className="absolute bottom-10 left-10 text-primary/5 text-[120px] font-bold animate-pound-rotate select-none pointer-events-none" style={{ animationDelay: '2s' }}>
         £
       </div>
+      
+      {/* Floating particles */}
+      <div className="absolute top-1/4 right-1/3 w-2 h-2 rounded-full bg-primary/20 animate-bounce" style={{ animationDuration: '3s' }} />
+      <div className="absolute top-2/3 right-1/4 w-3 h-3 rounded-full bg-accent/20 animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }} />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl">
-          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-4 animate-float-up" style={{ animationDelay: '0.1s' }}>
-            Phoenix Finserv — Helping Secure Dreams
-          </p>
+          <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10 rounded-full px-4 py-2 mb-6 animate-float-up" style={{ animationDelay: '0.1s' }}>
+            <Sparkles size={14} className="text-primary" />
+            <span className="text-primary-foreground/80 text-sm font-medium">Phoenix Finserv — Helping Secure Dreams</span>
+          </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6 animate-float-up" style={{ animationDelay: '0.3s' }}>
             Best Solution to{" "}
@@ -32,35 +36,28 @@ const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="text-lg text-primary-foreground/70 mb-8 max-w-xl leading-relaxed animate-float-up" style={{ animationDelay: '0.5s' }}>
+          <p className="text-lg text-primary-foreground/70 mb-10 max-w-xl leading-relaxed animate-float-up" style={{ animationDelay: '0.5s' }}>
             From protection and mortgages to pensions and estate planning — we provide expert
             financial advice to secure your future and your family's dreams.
           </p>
 
           <div className="flex flex-wrap gap-4 animate-float-up" style={{ animationDelay: '0.7s' }}>
-            <Button size="lg" className="bg-primary hover:bg-phoenix-orange-dark text-primary-foreground font-semibold text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all group">
-              Contact Us
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-            </Button>
-            <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-lg px-8 py-6">
-              Our Services
-            </Button>
-          </div>
-
-          {/* Stats */}
-          <div className="flex flex-wrap gap-8 mt-14 animate-float-up" style={{ animationDelay: '0.9s' }}>
-            {[
-              { number: "15+", label: "Years Experience" },
-              { number: "2,500+", label: "Happy Clients" },
-              { number: "98%", label: "Client Satisfaction" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="text-3xl font-bold text-primary">{stat.number}</p>
-                <p className="text-sm text-primary-foreground/60">{stat.label}</p>
-              </div>
-            ))}
+            <a href="#contact" className="inline-flex items-center gap-2 bg-primary hover:bg-phoenix-orange-dark text-primary-foreground font-semibold text-lg px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 group">
+              Get a Free Quote
+              <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+            </a>
+            <a href="tel:+442079932737" className="inline-flex items-center gap-2 border-2 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 backdrop-blur-sm">
+              📞 Talk to Advisor
+            </a>
           </div>
         </div>
+      </div>
+
+      {/* Bottom wave */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 60" fill="none" className="w-full">
+          <path d="M0 60L60 52C120 44 240 28 360 22C480 16 600 20 720 26C840 32 960 40 1080 42C1200 44 1320 40 1380 38L1440 36V60H0Z" fill="hsl(var(--background))" />
+        </svg>
       </div>
     </section>
   );

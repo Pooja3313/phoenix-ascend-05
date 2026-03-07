@@ -6,23 +6,43 @@ import RightSidebar from "./RightSidebar";
 const services = [
   {
     name: "Protection",
-    items: ["Life Insurance", "Critical Illness Cover", "Income Protection", "Family Protection", "Business Protection"],
+    columns: [
+      { heading: "Personal Protection", items: ["Life Cover", "Critical Illness", "Income Protection"] },
+      { heading: "Business Protection", items: ["Keyman Cover", "Shareholder Protection", "Relevant Life Cover", "Business Loan Protection"] },
+      { heading: "Home Insurance", items: ["Buildings & Contents"] },
+    ],
   },
   {
     name: "Mortgage",
-    items: ["First Time Buyers", "Remortgage", "Buy to Let", "Help to Buy", "Commercial Mortgages"],
+    columns: [
+      { heading: "Residential", items: ["First Time Buyers", "Remortgage", "Help to Buy"] },
+      { heading: "Investment", items: ["Buy to Let", "Portfolio Landlords"] },
+      { heading: "Specialist", items: ["Commercial Mortgages", "Bridging Loans"] },
+    ],
   },
   {
     name: "Commercial Lending",
-    items: ["Business Loans", "Asset Finance", "Invoice Finance", "Property Finance", "Development Finance"],
+    columns: [
+      { heading: "Business Finance", items: ["Business Loans", "Asset Finance"] },
+      { heading: "Cash Flow", items: ["Invoice Finance", "Overdraft Facilities"] },
+      { heading: "Property", items: ["Property Finance", "Development Finance"] },
+    ],
   },
   {
     name: "Pensions",
-    items: ["Personal Pensions", "Workplace Pensions", "SIPP", "Pension Drawdown", "Pension Transfer"],
+    columns: [
+      { heading: "Personal", items: ["Personal Pensions", "SIPP", "Pension Transfer"] },
+      { heading: "Workplace", items: ["Workplace Pensions", "Auto Enrolment"] },
+      { heading: "Retirement", items: ["Pension Drawdown", "Annuities"] },
+    ],
   },
   {
     name: "Wills & Estate Planning",
-    items: ["Will Writing", "Trusts", "Power of Attorney", "Inheritance Tax Planning", "Estate Administration"],
+    columns: [
+      { heading: "Wills", items: ["Will Writing", "Mirror Wills"] },
+      { heading: "Trusts & POA", items: ["Trusts", "Power of Attorney"] },
+      { heading: "Planning", items: ["Inheritance Tax Planning", "Estate Administration"] },
+    ],
   },
 ];
 
@@ -36,25 +56,37 @@ const navLinks = [
 ];
 
 const Header = () => {
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeService, setActiveService] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const servicesWrapRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handlePointerDown = (e: PointerEvent) => {
-      if (!servicesWrapRef.current) return;
-      if (!servicesWrapRef.current.contains(e.target as Node)) setServicesOpen(false);
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setActiveService(null);
+      }
     };
-
     window.addEventListener("pointerdown", handlePointerDown);
     return () => window.removeEventListener("pointerdown", handlePointerDown);
   }, []);
 
+  const handleServiceEnter = (name: string) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveService(name);
+  };
+
+  const handleServiceLeave = () => {
+    timeoutRef.current = setTimeout(() => setActiveService(null), 200);
+  };
+
+  const currentService = services.find(s => s.name === activeService);
+
   return (
     <div className="overflow-x-hidden">
-      {/* Top Bar - gray: email & phone left, IN right */}
+      {/* Top Bar */}
       <div className="bg-phoenix-gray-dark text-white shrink-0">
         <div className="container mx-auto flex items-center justify-between px-4 py-2.5 text-sm min-w-0">
           <div className="flex items-center gap-4 sm:gap-6 min-w-0">
@@ -73,20 +105,15 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Navigation - white bar like reference */}
+      {/* Main Navigation */}
       <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm shrink-0 overflow-x-hidden">
         <div className="container mx-auto flex items-center justify-between gap-2 px-4 py-2.5 min-w-0">
-          {/* Logo - left */}
           <a href="#" className="flex items-center shrink-0">
-            <img
-              src="/images/Phoenix-Finserv.png"
-              alt="Phoenix Finserv"
-              className="h-14 sm:h-16 w-auto object-contain"
-            />
+            <img src="/images/Phoenix-Finserv.png" alt="Phoenix Finserv" className="h-14 sm:h-16 w-auto object-contain" />
           </a>
 
-          {/* Desktop Nav - single line, centered like reference */}
-          <nav className="hidden xl:flex items-center gap-1 min-w-0 flex-1 justify-end">
+          {/* Desktop Nav */}
+          <nav className="hidden xl:flex items-center gap-1 min-w-0 flex-1 justify-end" ref={dropdownRef}>
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -97,84 +124,89 @@ const Header = () => {
               </a>
             ))}
 
-            {/* Single Services dropdown - all services inside */}
+            {/* Services with tabs dropdown */}
             <div
-              ref={servicesWrapRef}
               className="relative shrink-0"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              onMouseEnter={() => handleServiceEnter(services[0].name)}
+              onMouseLeave={handleServiceLeave}
             >
               <button
                 type="button"
-                onClick={() => setServicesOpen((v) => !v)}
                 className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap"
               >
                 Services
-                <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
+                <ChevronDown size={14} className={`transition-transform duration-200 ${activeService ? "rotate-180" : ""}`} />
               </button>
 
-              {servicesOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0.5 w-[min(520px,calc(100vw-2rem))] bg-card rounded-lg shadow-xl border border-border py-3 animate-fade-in z-[60]">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 px-3">
+              {/* Mega dropdown */}
+              {activeService && (
+                <div
+                  className="absolute top-full right-0 mt-0 w-[680px] bg-phoenix-gray-dark rounded-b-xl shadow-2xl border border-border/20 overflow-hidden z-[60]"
+                  style={{ animation: 'slideDown 0.3s ease-out' }}
+                  onMouseEnter={() => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }}
+                  onMouseLeave={handleServiceLeave}
+                >
+                  {/* Service tabs */}
+                  <div className="flex border-b border-primary-foreground/10">
                     {services.map((service) => (
-                      <div key={service.name} className="rounded-md min-w-0">
-                        <div className="px-2 py-1 text-xs font-semibold uppercase tracking-wide text-primary border-b border-border/50">
-                          {service.name}
-                        </div>
-                        <div className="pt-0.5 pb-1">
-                          {service.items.map((item) => (
-                            <a
-                              key={item}
-                              href="#"
-                              className="block px-2 py-1 text-[13px] text-foreground hover:bg-phoenix-green-light hover:text-phoenix-green rounded transition-colors"
-                            >
-                              {item}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
+                      <button
+                        key={service.name}
+                        onMouseEnter={() => handleServiceEnter(service.name)}
+                        className={`flex-1 px-4 py-3 text-sm font-semibold transition-all whitespace-nowrap ${
+                          activeService === service.name
+                            ? 'bg-primary text-primary-foreground'
+                            : 'text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/5'
+                        }`}
+                      >
+                        {service.name}
+                      </button>
                     ))}
                   </div>
+
+                  {/* Columns */}
+                  {currentService && (
+                    <div className="grid grid-cols-3 gap-6 p-6" style={{ animation: 'fadeSlideUp 0.25s ease-out' }}>
+                      {currentService.columns.map((col) => (
+                        <div key={col.heading}>
+                          <h4 className="text-primary-foreground font-bold text-sm mb-3">{col.heading}</h4>
+                          <div className="space-y-1">
+                            {col.items.map((item) => (
+                              <a
+                                key={item}
+                                href="#"
+                                className="block py-1.5 text-sm text-primary-foreground/60 hover:text-primary transition-colors hover:translate-x-1 transform duration-200"
+                              >
+                                {item}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Bottom line per logo colors */}
+                  <div className="h-1 bg-gradient-to-r from-primary via-accent to-phoenix-gold" />
                 </div>
               )}
             </div>
           </nav>
 
-          {/* Right: Contact Us + grid - always visible */}
+          {/* Right buttons */}
           <div className="flex items-center gap-2 shrink-0">
             <Button className="hidden sm:inline-flex bg-primary hover:bg-phoenix-orange-dark text-primary-foreground text-[13px] font-semibold py-2 px-4 shadow-lg hover:shadow-xl transition-all shrink-0">
               Contact Us
             </Button>
-
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="p-2 hover:bg-muted rounded-md transition-colors shrink-0"
-              aria-label="Open menu"
-            >
+            <button onClick={() => setSidebarOpen(true)} className="p-2 hover:bg-muted rounded-md transition-colors shrink-0" aria-label="Open menu">
               <div className="flex flex-col gap-0.5">
-                <div className="flex gap-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                </div>
-                <div className="flex gap-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                </div>
-                <div className="flex gap-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                </div>
+                {[0, 1, 2].map(r => (
+                  <div key={r} className="flex gap-0.5">
+                    {[0, 1, 2].map(c => <span key={c} className="w-1.5 h-1.5 rounded-full bg-foreground" />)}
+                  </div>
+                ))}
               </div>
             </button>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 hover:bg-muted rounded-md transition-colors"
-              aria-label="Toggle menu"
-            >
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="xl:hidden p-2 hover:bg-muted rounded-md transition-colors" aria-label="Toggle menu">
               {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
@@ -185,16 +217,10 @@ const Header = () => {
           <div className="xl:hidden border-t border-border bg-background animate-fade-in overflow-y-auto max-h-[70vh]">
             <div className="container mx-auto px-4 py-4 space-y-1">
               {navLinks.map((link) => (
-                <a key={link.name} href={link.href} className="block px-4 py-2.5 text-sm text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5">
-                  {link.name}
-                </a>
+                <a key={link.name} href={link.href} className="block px-4 py-2.5 text-sm text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5">{link.name}</a>
               ))}
               <div>
-                <button
-                  type="button"
-                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                  className="flex items-center justify-between w-full px-4 py-2.5 text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5"
-                >
+                <button type="button" onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="flex items-center justify-between w-full px-4 py-2.5 text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5">
                   <span className="text-sm">Services</span>
                   <ChevronDown size={14} className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
                 </button>
@@ -203,21 +229,15 @@ const Header = () => {
                     {services.map((service) => (
                       <div key={service.name}>
                         <div className="text-xs font-semibold text-primary uppercase tracking-wide py-1">{service.name}</div>
-                        <div className="space-y-0.5">
-                          {service.items.map((item) => (
-                            <a key={item} href="#" className="block py-1.5 text-sm text-muted-foreground hover:text-phoenix-green transition-colors">
-                              {item}
-                            </a>
-                          ))}
-                        </div>
+                        {service.columns.map(col => col.items.map(item => (
+                          <a key={item} href="#" className="block py-1.5 text-sm text-muted-foreground hover:text-phoenix-green transition-colors">{item}</a>
+                        )))}
                       </div>
                     ))}
                   </div>
                 )}
               </div>
-              <Button className="w-full mt-4 bg-primary hover:bg-phoenix-orange-dark text-primary-foreground">
-                Contact Us
-              </Button>
+              <Button className="w-full mt-4 bg-primary hover:bg-phoenix-orange-dark text-primary-foreground">Contact Us</Button>
             </div>
           </div>
         )}

@@ -1,10 +1,13 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
+import MissionVision from "@/components/MissionVision";
 import ValuesSection from "@/components/ValuesSection";
 import ServicesSection from "@/components/ServicesSection";
-import TestimonialSection from "@/components/TestimonialSection";
+import StatsCounter from "@/components/StatsCounter";
 import PoundAnimation from "@/components/PoundAnimation";
+import TestimonialSection from "@/components/TestimonialSection";
+import DedicatedTeam from "@/components/DedicatedTeam";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -18,10 +21,13 @@ const Index = () => {
       <main>
         <HeroSection />
         <AboutSection />
+        <MissionVision />
         <ValuesSection />
         <ServicesSection />
+        <StatsCounter />
         <PoundAnimation />
         <TestimonialSection />
+        <DedicatedTeam />
         <WhyChooseUs />
         <CTASection />
       </main>

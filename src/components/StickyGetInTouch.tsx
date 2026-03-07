@@ -1,13 +1,35 @@
+import { Phone } from "lucide-react";
+import { useState } from "react";
+
 const StickyGetInTouch = () => {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <a
       href="#contact"
-      className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-primary text-primary-foreground px-3 py-6 rounded-l-lg shadow-xl hover:bg-phoenix-orange-dark transition-all duration-300 hover:pr-5 group"
-      style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+      className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-0 group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      <span className="text-sm font-bold tracking-widest uppercase group-hover:tracking-[0.2em] transition-all">
-        Get in Touch
-      </span>
+      {/* Expanded content on hover */}
+      <div className={`bg-primary text-primary-foreground overflow-hidden transition-all duration-500 ease-out rounded-l-xl flex items-center ${hovered ? 'max-w-[200px] px-4 py-4' : 'max-w-0 px-0 py-4'}`}>
+        <div className="whitespace-nowrap flex items-center gap-2">
+          <Phone size={16} className="animate-pulse shrink-0" />
+          <span className="text-sm font-semibold">Call Us Now</span>
+        </div>
+      </div>
+
+      {/* Main tab */}
+      <div className="bg-primary text-primary-foreground px-3 py-8 rounded-l-xl shadow-2xl hover:bg-phoenix-orange-dark transition-all duration-300 relative overflow-hidden"
+        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+      >
+        {/* Shine effect */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-foreground/0 via-primary-foreground/20 to-primary-foreground/0 translate-y-full group-hover:translate-y-[-100%] transition-transform duration-1000" />
+        
+        <span className="text-sm font-bold tracking-[0.15em] uppercase relative z-10">
+          Get in Touch
+        </span>
+      </div>
     </a>
   );
 };
