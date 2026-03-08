@@ -47,12 +47,13 @@ const services = [
 ];
 
 const navLinks = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#about" },
-  { name: "Your Journey", href: "#journey" },
-  { name: "Join Our Network", href: "#join-our-network" },
-  { name: "Careers", href: "#careers" },
-  { name: "Refer a Friend", href: "#refer-a-friend" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Your Journey", href: "/our-journey" },
+  { name: "Join Our Network", href: "/network" },
+  { name: "Refer a Friend", href: "/#refer-a-friend" },
+  { name: "Careers", href: "/careers" },
+  { name: "Newsletter", href: "/#newsletter" },
 ];
 
 const Header = () => {
