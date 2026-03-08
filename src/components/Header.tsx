@@ -47,12 +47,13 @@ const services = [
 ];
 
 const navLinks = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#about" },
-  { name: "Your Journey", href: "#journey" },
-  { name: "Join Our Network", href: "#join-our-network" },
-  { name: "Careers", href: "#careers" },
-  { name: "Refer a Friend", href: "#refer-a-friend" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Your Journey", href: "/our-journey" },
+  { name: "Join Our Network", href: "/network" },
+  { name: "Refer a Friend", href: "/#refer-a-friend" },
+  { name: "Careers", href: "/careers" },
+  { name: "Newsletter", href: "/#newsletter" },
 ];
 
 const Header = () => {
@@ -194,9 +195,9 @@ const Header = () => {
 
           {/* Right buttons */}
           <div className="flex items-center gap-2 shrink-0">
-            <Button className="hidden sm:inline-flex bg-primary hover:bg-phoenix-orange-dark text-primary-foreground text-[13px] font-semibold py-2 px-4 shadow-lg hover:shadow-xl transition-all shrink-0">
+            <a href="/contact" className="hidden sm:inline-flex items-center justify-center bg-primary hover:bg-phoenix-orange-dark text-primary-foreground text-[13px] font-semibold py-2 px-4 rounded-md shadow-lg hover:shadow-xl transition-all shrink-0">
               Contact Us
-            </Button>
+            </a>
             <button onClick={() => setSidebarOpen(true)} className="p-2 hover:bg-muted rounded-md transition-colors shrink-0" aria-label="Open menu">
               <div className="flex flex-col gap-0.5">
                 {[0, 1, 2].map(r => (

@@ -1,36 +1,35 @@
-import { Shield, Award, Users, Heart, Target, Lightbulb } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const values = [
+const prideValues = [
   {
-    icon: Shield,
+    letter: "P",
+    title: "Professional",
+    subtitle: "Be Competent\nResourceful and Effective",
+    quote: "\"We value our excellent reputation and are committed to maintaining the highest professional and ethical standards in our business affairs\"",
+  },
+  {
+    letter: "R",
+    title: "Respect",
+    subtitle: "Be Courteous\nBe Considerate and\nPromote a Collaborative\nWork Environment",
+    quote: "\"We emphasise everyone's contribution regardless of race, gender, religion, national origin, age, disability, gender identity, and sexual orientation\"",
+  },
+  {
+    letter: "I",
     title: "Integrity",
-    description: "We uphold the highest standards of honesty and transparency in all our financial dealings.",
+    subtitle: "We Do What is Right\nand Create Trust\nAmong Peers and\nStakeholders",
+    quote: "\"We believe in being honest and transparent in our work from the outset\"",
   },
   {
-    icon: Award,
-    title: "Professionalism",
-    description: "Our team of certified professionals delivers expert advice with precision and care.",
+    letter: "D",
+    title: "Driven",
+    subtitle: "We Meet and Exceed\nServices Expectations\nwe Assume\nA 'Can do' Attitude",
+    quote: "\"Our success is based on the quality and commitment of our colleagues\"",
   },
   {
-    icon: Users,
-    title: "Customer Focus",
-    description: "Your financial goals are our priority. We tailor every solution to your unique needs.",
-  },
-  {
-    icon: Heart,
-    title: "Trust",
-    description: "Building lasting relationships through reliable, consistent, and dedicated service.",
-  },
-  {
-    icon: Target,
+    letter: "E",
     title: "Excellence",
-    description: "We strive for perfection in every interaction, ensuring the best outcomes for our clients.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Innovation",
-    description: "Embracing modern solutions and technology to provide cutting-edge financial services.",
+    subtitle: "We Hold ourselves\nto the highest Standards\nof Performance",
+    quote: "\"We continuously invest in talented accountants and innovative technology\"",
   },
 ];
 
@@ -41,39 +40,62 @@ const ValuesSection = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="py-20 bg-background" ref={ref}>
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-14">
-          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Our Core Values</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            <span className="font-handwritten text-4xl md:text-5xl text-primary">Pillars</span> of Our Values
+    <section className="py-24 bg-phoenix-gray-dark text-primary-foreground relative overflow-hidden" ref={ref}>
+      {/* Background decorations */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <p className="text-primary font-semibold text-sm uppercase tracking-[0.25em] mb-3">Our Core Values</p>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            We Take <span className="text-primary font-handwritten text-4xl md:text-5xl">P.R.I.D.E.</span> In Our Work
           </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            At Phoenix Finserv, our values define who we are and how we serve our clients every day.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {prideValues.map((value, index) => (
             <div
-              key={value.title}
-              className={`group p-8 rounded-2xl border border-border bg-card hover:shadow-xl transition-all duration-500 cursor-pointer ${
-                visible ? 'animate-float-up' : 'opacity-0'
-              }`}
-              style={{ animationDelay: `${index * 0.15}s` }}
+              key={value.letter}
+              className={`group relative ${visible ? 'animate-float-up' : 'opacity-0'}`}
+              style={{ animationDelay: `${index * 0.12}s` }}
             >
-              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-phoenix-green group-hover:scale-110 transition-all duration-300 icon-hover-bounce">
-                <value.icon size={28} className="text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+              {/* Main card */}
+              <div className="relative bg-primary-foreground/[0.04] border border-primary-foreground/10 rounded-2xl p-6 hover:border-primary/40 hover:bg-primary-foreground/[0.08] transition-all duration-500 h-full flex flex-col">
+                {/* Big letter */}
+                <div className="relative mb-4">
+                  <span className="text-7xl md:text-8xl font-bold text-primary/80 group-hover:text-primary group-hover:scale-110 transition-all duration-500 inline-block leading-none">
+                    {value.letter}
+                  </span>
+                  {/* Glow effect behind letter on hover */}
+                  <div className="absolute inset-0 bg-primary/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-lg font-bold mb-3 text-primary-foreground group-hover:text-primary transition-colors duration-300">
+                  {value.title}
+                </h3>
+
+                {/* Subtitle */}
+                <p className="text-sm text-primary-foreground/60 leading-relaxed whitespace-pre-line mb-4 flex-1">
+                  {value.subtitle}
+                </p>
+
+                {/* Divider */}
+                <div className="h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent mb-4" />
+
+                {/* Quote */}
+                <p className="text-xs text-primary-foreground/40 italic leading-relaxed group-hover:text-primary-foreground/60 transition-colors duration-300">
+                  {value.quote}
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{value.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
             </div>
           ))}
         </div>
