@@ -54,67 +54,201 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right side SVG illustration */}
+          {/* Right side - Detailed Team SVG Illustration matching reference */}
           <div className="flex-1 hidden lg:flex justify-center animate-float-up" style={{ animationDelay: '0.5s' }}>
-            <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-lg">
-              {/* Desk */}
-              <rect x="60" y="260" width="480" height="8" rx="4" fill="hsl(var(--phoenix-gray-light))" />
-              <rect x="120" y="268" width="8" height="80" rx="2" fill="hsl(var(--phoenix-gray))" />
-              <rect x="472" y="268" width="8" height="80" rx="2" fill="hsl(var(--phoenix-gray))" />
+            <svg viewBox="0 0 700 480" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-xl">
+              {/* Background elements - wall decorations */}
+              <rect x="50" y="60" width="40" height="55" rx="4" stroke="hsl(var(--phoenix-gray)/0.3)" strokeWidth="2" fill="none" />
+              <rect x="55" y="65" width="30" height="20" rx="2" fill="hsl(var(--phoenix-gray-light))" />
+              <rect x="55" y="90" width="30" height="20" rx="2" fill="hsl(var(--phoenix-gray-light))" />
+              
+              {/* Clock on wall */}
+              <circle cx="620" cy="80" r="22" stroke="hsl(var(--phoenix-gray)/0.4)" strokeWidth="2" fill="hsl(var(--background))" />
+              <line x1="620" y1="80" x2="620" y2="65" stroke="hsl(var(--phoenix-gray))" strokeWidth="2" strokeLinecap="round" />
+              <line x1="620" y1="80" x2="632" y2="80" stroke="hsl(var(--phoenix-gray))" strokeWidth="2" strokeLinecap="round" />
+              <circle cx="620" cy="80" r="2" fill="hsl(var(--phoenix-gray))" />
 
-              {/* Person 1 - sitting left */}
+              {/* === Person 1 - Man sitting left (orange shirt) === */}
               <g>
-                <circle cx="140" cy="200" r="20" fill="hsl(var(--primary))" />
-                <rect x="125" y="222" width="30" height="38" rx="6" fill="hsl(var(--primary))" />
-                {/* Laptop */}
-                <rect x="110" y="245" width="50" height="15" rx="3" fill="hsl(var(--phoenix-gray))" />
-                <rect x="115" y="235" width="40" height="12" rx="2" fill="hsl(var(--accent))" opacity="0.3" />
+                {/* Chair */}
+                <rect x="72" y="340" width="8" height="50" rx="2" fill="hsl(var(--phoenix-gray))" />
+                <rect x="60" y="330" width="70" height="8" rx="3" fill="hsl(var(--phoenix-gray))" />
+                <path d="M65 330 L65 280 Q65 270 75 270 L75 330" fill="none" stroke="hsl(var(--phoenix-gray))" strokeWidth="3" />
+                
+                {/* Body - orange shirt */}
+                <rect x="72" y="240" width="50" height="60" rx="10" fill="hsl(var(--primary))" />
+                {/* Arms */}
+                <rect x="60" y="255" width="15" height="8" rx="4" fill="hsl(var(--primary))" />
+                <rect x="120" y="252" width="30" height="8" rx="4" fill="hsl(var(--primary))" transform="rotate(-10 120 252)" />
+                {/* Hands */}
+                <circle cx="148" cy="248" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                <circle cx="58" cy="259" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                
+                {/* Head */}
+                <circle cx="97" cy="210" r="24" fill="hsl(var(--phoenix-gray-light))" />
+                {/* Hair */}
+                <path d="M73 205 Q73 185 97 180 Q121 185 121 205" fill="hsl(var(--foreground))" />
+                {/* Beard */}
+                <path d="M82 218 Q97 235 112 218" fill="hsl(var(--foreground)/0.7)" />
+                {/* Eyes */}
+                <circle cx="88" cy="210" r="2.5" fill="hsl(var(--foreground))" />
+                <circle cx="106" cy="210" r="2.5" fill="hsl(var(--foreground))" />
+                {/* Glasses */}
+                <rect x="82" y="205" width="14" height="12" rx="6" stroke="hsl(var(--foreground))" strokeWidth="1.5" fill="none" />
+                <rect x="100" y="205" width="14" height="12" rx="6" stroke="hsl(var(--foreground))" strokeWidth="1.5" fill="none" />
+                <line x1="96" y1="211" x2="100" y2="211" stroke="hsl(var(--foreground))" strokeWidth="1.5" />
+                
+                {/* Laptop on desk */}
+                <rect x="70" y="310" width="55" height="5" rx="2" fill="hsl(var(--phoenix-gray))" />
+                <rect x="75" y="290" width="45" height="22" rx="3" fill="hsl(var(--phoenix-gray))" />
+                <rect x="78" y="293" width="39" height="16" rx="2" fill="hsl(var(--accent)/0.3)" />
               </g>
 
-              {/* Person 2 - standing left-center */}
+              {/* === Person 2 - Man standing (green shirt) === */}
               <g>
-                <circle cx="240" cy="185" r="22" fill="hsl(var(--accent))" />
-                <rect x="222" y="210" width="36" height="50" rx="7" fill="hsl(var(--accent))" />
-                {/* Laptop */}
-                <rect x="215" y="245" width="50" height="15" rx="3" fill="hsl(var(--phoenix-gray))" />
-                <rect x="220" y="235" width="40" height="12" rx="2" fill="hsl(var(--primary))" opacity="0.2" />
+                {/* Legs */}
+                <rect x="218" y="340" width="12" height="55" rx="4" fill="hsl(var(--foreground)/0.8)" />
+                <rect x="240" y="340" width="12" height="55" rx="4" fill="hsl(var(--foreground)/0.8)" />
+                {/* Shoes */}
+                <rect x="214" y="390" width="20" height="8" rx="4" fill="hsl(var(--foreground))" />
+                <rect x="236" y="390" width="20" height="8" rx="4" fill="hsl(var(--foreground))" />
+                
+                {/* Body - green shirt */}
+                <rect x="210" y="250" width="55" height="65" rx="12" fill="hsl(var(--accent))" />
+                {/* Collar */}
+                <path d="M225 250 L237 265 L249 250" fill="hsl(var(--accent))" stroke="hsl(var(--background))" strokeWidth="1.5" />
+                {/* Arms */}
+                <rect x="198" y="258" width="15" height="8" rx="4" fill="hsl(var(--accent))" />
+                <path d="M265 260 L290 240 L295 245 L270 265" fill="hsl(var(--accent))" />
+                {/* Hands */}
+                <circle cx="196" cy="262" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                <circle cx="295" cy="242" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                
+                {/* Head */}
+                <circle cx="237" cy="218" r="26" fill="hsl(var(--phoenix-gray-light))" />
+                {/* Hair - short */}
+                <path d="M211 212 Q211 190 237 185 Q263 190 263 212" fill="hsl(var(--foreground))" />
+                {/* Eyes */}
+                <circle cx="228" cy="218" r="2.5" fill="hsl(var(--foreground))" />
+                <circle cx="246" cy="218" r="2.5" fill="hsl(var(--foreground))" />
+                {/* Smile */}
+                <path d="M228 228 Q237 235 246 228" fill="none" stroke="hsl(var(--foreground))" strokeWidth="1.5" strokeLinecap="round" />
+                
+                {/* Laptop on desk */}
+                <rect x="205" y="310" width="55" height="5" rx="2" fill="hsl(var(--phoenix-gray))" />
+                <rect x="210" y="290" width="45" height="22" rx="3" fill="hsl(var(--phoenix-gray))" />
+                <rect x="213" y="293" width="39" height="16" rx="2" fill="hsl(var(--primary)/0.2)" />
               </g>
 
-              {/* Person 3 - center standing */}
-              <g>
-                <circle cx="340" cy="182" r="22" fill="hsl(var(--accent))" opacity="0.8" />
-                <rect x="322" y="207" width="36" height="53" rx="7" fill="hsl(var(--accent))" opacity="0.7" />
-                {/* Gesturing hand */}
-                <rect x="358" y="215" width="20" height="5" rx="2" fill="hsl(var(--accent))" opacity="0.6" transform="rotate(-20 358 215)" />
+              {/* === Chat bubbles between person 2 and 3 === */}
+              <g className="animate-bounce" style={{ animationDuration: '4s' }}>
+                <rect x="310" y="170" width="50" height="30" rx="10" fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" />
+                <circle cx="322" cy="185" r="4" fill="hsl(var(--primary))" />
+                <circle cx="335" cy="185" r="4" fill="hsl(var(--accent))" />
+                <circle cx="348" cy="185" r="4" fill="hsl(var(--phoenix-gold))" />
+                <path d="M320 200 L315 210 L330 200" fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="1.5" />
               </g>
 
-              {/* Person 4 - sitting right */}
+              {/* === Person 3 - Woman standing (teal/green outfit) === */}
               <g>
-                <circle cx="460" cy="200" r="20" fill="hsl(var(--primary))" opacity="0.85" />
-                <rect x="445" y="222" width="30" height="38" rx="6" fill="hsl(var(--primary))" opacity="0.85" />
-                {/* Laptop */}
-                <rect x="430" y="245" width="50" height="15" rx="3" fill="hsl(var(--phoenix-gray))" />
-                <rect x="435" y="235" width="40" height="12" rx="2" fill="hsl(var(--accent))" opacity="0.3" />
-                {/* Coffee cup */}
-                <rect x="490" y="248" width="10" height="12" rx="3" fill="hsl(var(--phoenix-gold))" />
+                {/* Legs */}
+                <rect x="360" y="340" width="11" height="55" rx="4" fill="hsl(var(--accent)/0.7)" />
+                <rect x="382" y="340" width="11" height="55" rx="4" fill="hsl(var(--accent)/0.7)" />
+                {/* Shoes - heels */}
+                <rect x="356" y="390" width="18" height="8" rx="3" fill="hsl(var(--foreground))" />
+                <rect x="378" y="390" width="18" height="8" rx="3" fill="hsl(var(--foreground))" />
+                
+                {/* Body - teal top */}
+                <rect x="348" y="250" width="55" height="45" rx="10" fill="hsl(var(--accent)/0.8)" />
+                {/* Skirt / lower body */}
+                <path d="M348 295 L340 340 L410 340 L405 295" fill="hsl(var(--accent)/0.6)" />
+                {/* Arms */}
+                <path d="M348 260 L330 280 L335 285 L350 268" fill="hsl(var(--accent)/0.8)" />
+                <path d="M403 258 L425 240" stroke="hsl(var(--accent)/0.8)" strokeWidth="8" strokeLinecap="round" />
+                {/* Hands */}
+                <circle cx="328" cy="282" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                <circle cx="428" cy="237" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                {/* Handbag */}
+                <rect x="325" y="282" width="12" height="18" rx="3" fill="hsl(var(--foreground)/0.8)" />
+                
+                {/* Head */}
+                <circle cx="375" cy="218" r="24" fill="hsl(var(--phoenix-gray-light))" />
+                {/* Long hair */}
+                <path d="M351 215 Q350 190 375 182 Q400 190 399 215" fill="hsl(var(--foreground))" />
+                <path d="M351 215 L348 255" stroke="hsl(var(--foreground))" strokeWidth="6" strokeLinecap="round" />
+                <path d="M399 215 L402 255" stroke="hsl(var(--foreground))" strokeWidth="6" strokeLinecap="round" />
+                {/* Glasses */}
+                <rect x="362" y="213" width="12" height="10" rx="5" stroke="hsl(var(--foreground))" strokeWidth="1.5" fill="none" />
+                <rect x="378" y="213" width="12" height="10" rx="5" stroke="hsl(var(--foreground))" strokeWidth="1.5" fill="none" />
+                <line x1="374" y1="218" x2="378" y2="218" stroke="hsl(var(--foreground))" strokeWidth="1.5" />
+                {/* Eyes */}
+                <circle cx="368" cy="218" r="2" fill="hsl(var(--foreground))" />
+                <circle cx="384" cy="218" r="2" fill="hsl(var(--foreground))" />
+                {/* Smile */}
+                <path d="M368 228 Q375 233 382 228" fill="none" stroke="hsl(var(--foreground))" strokeWidth="1.5" strokeLinecap="round" />
               </g>
 
-              {/* Chat bubble */}
-              <rect x="280" y="145" width="40" height="25" rx="8" fill="hsl(var(--primary))" opacity="0.2" />
-              <circle cx="290" cy="157" r="3" fill="hsl(var(--primary))" opacity="0.4" />
-              <circle cx="300" cy="157" r="3" fill="hsl(var(--accent))" opacity="0.4" />
-              <circle cx="310" cy="157" r="3" fill="hsl(var(--phoenix-gold))" opacity="0.4" />
+              {/* === Person 4 - Woman sitting right (coral/orange outfit) === */}
+              <g>
+                {/* Chair */}
+                <rect x="520" y="340" width="8" height="50" rx="2" fill="hsl(var(--phoenix-gray))" />
+                <rect x="505" y="330" width="70" height="8" rx="3" fill="hsl(var(--phoenix-gray))" />
+                <path d="M570 330 L570 280 Q570 270 560 270 L560 330" fill="none" stroke="hsl(var(--phoenix-gray))" strokeWidth="3" />
+                
+                {/* Body - coral/orange dress */}
+                <rect x="510" y="248" width="50" height="55" rx="10" fill="hsl(var(--primary)/0.85)" />
+                {/* Arms */}
+                <rect x="498" y="260" width="15" height="8" rx="4" fill="hsl(var(--primary)/0.85)" />
+                <rect x="558" y="258" width="25" height="8" rx="4" fill="hsl(var(--primary)/0.85)" />
+                {/* Hands */}
+                <circle cx="496" cy="264" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                <circle cx="585" cy="260" r="5" fill="hsl(var(--phoenix-gray-light))" />
+                
+                {/* Head */}
+                <circle cx="535" cy="216" r="24" fill="hsl(var(--phoenix-gray-light))" />
+                {/* Hair - updo */}
+                <path d="M511 212 Q510 188 535 180 Q560 188 559 212" fill="hsl(var(--foreground))" />
+                <circle cx="535" cy="178" r="8" fill="hsl(var(--foreground))" />
+                {/* Eyes */}
+                <circle cx="526" cy="216" r="2.5" fill="hsl(var(--foreground))" />
+                <circle cx="544" cy="216" r="2.5" fill="hsl(var(--foreground))" />
+                {/* Smile */}
+                <path d="M526 226 Q535 232 544 226" fill="none" stroke="hsl(var(--foreground))" strokeWidth="1.5" strokeLinecap="round" />
+                
+                {/* Coffee cup in hand */}
+                <rect x="580" y="248" width="14" height="18" rx="4" fill="hsl(var(--phoenix-gold))" />
+                <rect x="578" y="245" width="18" height="4" rx="2" fill="hsl(var(--phoenix-gold))" />
+                {/* Steam */}
+                <path d="M585 240 Q588 232 585 225" stroke="hsl(var(--phoenix-gray)/0.4)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path d="M590 238 Q593 230 590 222" stroke="hsl(var(--phoenix-gray)/0.3)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                
+                {/* Laptop on desk */}
+                <rect x="510" y="310" width="55" height="5" rx="2" fill="hsl(var(--phoenix-gray))" />
+                <rect x="515" y="290" width="45" height="22" rx="3" fill="hsl(var(--phoenix-gray))" />
+                <rect x="518" y="293" width="39" height="16" rx="2" fill="hsl(var(--accent)/0.3)" />
+              </g>
 
-              {/* Wall decorations */}
-              <rect x="50" y="100" width="30" height="40" rx="4" fill="hsl(var(--phoenix-gray-light))" opacity="0.5" />
-              <circle cx="530" cy="120" r="18" fill="hsl(var(--phoenix-gray-light))" opacity="0.3" />
+              {/* === Desk === */}
+              <rect x="50" y="325" width="600" height="10" rx="5" fill="hsl(var(--phoenix-gray-light))" />
+              <rect x="50" y="335" width="600" height="4" rx="2" fill="hsl(var(--phoenix-gray)/0.3)" />
 
-              {/* Plant */}
-              <rect x="530" y="290" width="12" height="25" rx="3" fill="hsl(var(--phoenix-gray))" opacity="0.4" />
-              <circle cx="536" cy="285" r="15" fill="hsl(var(--accent))" opacity="0.25" />
+              {/* Desk legs */}
+              <rect x="80" y="335" width="8" height="60" rx="2" fill="hsl(var(--phoenix-gray))" />
+              <rect x="612" y="335" width="8" height="60" rx="2" fill="hsl(var(--phoenix-gray))" />
 
-              {/* Floor */}
-              <line x1="40" y1="348" x2="560" y2="348" stroke="hsl(var(--border))" strokeWidth="1" />
+              {/* Trash can */}
+              <rect x="42" y="360" width="20" height="30" rx="3" fill="hsl(var(--phoenix-gray)/0.4)" />
+              <rect x="40" y="356" width="24" height="5" rx="2" fill="hsl(var(--phoenix-gray)/0.5)" />
+
+              {/* Plant on right */}
+              <rect x="640" y="350" width="14" height="40" rx="4" fill="hsl(var(--phoenix-gray)/0.5)" />
+              <ellipse cx="647" cy="345" rx="18" ry="22" fill="hsl(var(--accent)/0.3)" />
+              <ellipse cx="640" cy="340" rx="10" ry="15" fill="hsl(var(--accent)/0.25)" />
+              <ellipse cx="655" cy="338" rx="10" ry="14" fill="hsl(var(--accent)/0.2)" />
+              <line x1="647" y1="345" x2="647" y2="320" stroke="hsl(var(--accent)/0.4)" strokeWidth="2" />
+
+              {/* Floor line */}
+              <line x1="20" y1="398" x2="680" y2="398" stroke="hsl(var(--border))" strokeWidth="1.5" />
             </svg>
           </div>
         </div>
