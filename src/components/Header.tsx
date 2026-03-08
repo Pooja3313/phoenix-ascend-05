@@ -195,9 +195,9 @@ const Header = () => {
 
           {/* Right buttons */}
           <div className="flex items-center gap-2 shrink-0">
-            <Button className="hidden sm:inline-flex bg-primary hover:bg-phoenix-orange-dark text-primary-foreground text-[13px] font-semibold py-2 px-4 shadow-lg hover:shadow-xl transition-all shrink-0">
+            <a href="/contact" className="hidden sm:inline-flex items-center justify-center bg-primary hover:bg-phoenix-orange-dark text-primary-foreground text-[13px] font-semibold py-2 px-4 rounded-md shadow-lg hover:shadow-xl transition-all shrink-0">
               Contact Us
-            </Button>
+            </a>
             <button onClick={() => setSidebarOpen(true)} className="p-2 hover:bg-muted rounded-md transition-colors shrink-0" aria-label="Open menu">
               <div className="flex flex-col gap-0.5">
                 {[0, 1, 2].map(r => (
