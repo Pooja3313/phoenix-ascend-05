@@ -56,18 +56,20 @@ const Network = () => {
       <Header />
       <main>
         {/* Hero */}
-        <section className="relative py-24 bg-phoenix-gray-dark text-primary-foreground overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.1),transparent_60%)]" />
+        <section className="relative py-24 bg-gradient-to-br from-phoenix-gray-light via-background to-phoenix-green-light overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.08),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,hsl(var(--accent)/0.06),transparent_50%)]" />
           <div className="absolute top-10 right-10 text-primary/5 text-[180px] font-bold animate-pound-rotate select-none pointer-events-none">£</div>
+          <div className="absolute bottom-10 left-10 w-28 h-28 rounded-full bg-accent/5 animate-pound-morph pointer-events-none" />
           <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
             <AnimatedSection>
               <p className="text-primary font-semibold text-sm uppercase tracking-[0.25em] mb-4">Join Our Network</p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-foreground">
                 Phoenix Finserv Network, Helping Financial Advisers{" "}
                 <span className="font-handwritten text-5xl md:text-6xl lg:text-7xl text-primary pen-underline">Build Stronger</span>{" "}
                 Businesses
               </h1>
-              <p className="text-lg text-primary-foreground/70 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 From early setup to long-term planning, Phoenix Finserv Network provides the structure and support behind successful advisory businesses.
               </p>
             </AnimatedSection>
