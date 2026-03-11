@@ -81,10 +81,10 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-primary-foreground/60 hover:text-primary transition-colors flex items-center gap-2 group">
+                <li key={link.name}>
+                  <a href={link.href} className="text-sm text-primary-foreground/60 hover:text-primary transition-colors flex items-center gap-2 group">
                     <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
-                    {link}
+                    {link.name}
                   </a>
                 </li>
               ))}
