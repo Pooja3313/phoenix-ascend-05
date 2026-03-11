@@ -5,7 +5,20 @@ const Footer = () => {
   const [email, setEmail] = useState("");
 
   const serviceLinks = ["Protection", "Mortgage", "Commercial Lending", "Pensions", "Wills & Estate Planning"];
-  const quickLinks = ["Home", "About Us", "Your Journey", "Blog", "Contact", "Privacy Policy", "Terms of Service"];
+  const quickLinks = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/#about" },
+    { name: "Your Journey", href: "/our-journey" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" },
+    { name: "Refer a Friend", href: "/refer-a-friend" },
+  ];
+  const policyLinks = [
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
+    { name: "Complaints Procedure", href: "/complaints-procedure" },
+    { name: "Fair Treatment of Customers", href: "/fair-treatment" },
+  ];
 
   return (
     <footer className="relative bg-phoenix-gray-dark text-primary-foreground overflow-hidden">
@@ -68,10 +81,10 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-primary-foreground/60 hover:text-primary transition-colors flex items-center gap-2 group">
+                <li key={link.name}>
+                  <a href={link.href} className="text-sm text-primary-foreground/60 hover:text-primary transition-colors flex items-center gap-2 group">
                     <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
-                    {link}
+                    {link.name}
                   </a>
                 </li>
               ))}
@@ -112,6 +125,18 @@ const Footer = () => {
                 <ArrowRight size={16} />
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Policy Links Bar */}
+        <div className="border-t border-primary-foreground/10 pt-6 pb-4">
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            {policyLinks.map((link) => (
+              <a key={link.name} href={link.href} className="flex items-center gap-2 text-xs text-primary-foreground/50 hover:text-primary transition-colors">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                {link.name}
+              </a>
+            ))}
           </div>
         </div>
 

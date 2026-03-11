@@ -24,19 +24,17 @@ const WhyChooseUs = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Positions for 6 items in a proper circle
-  const positions = [
-    { top: '8%', left: '50%' },    // top center
-    { top: '28%', left: '85%' },   // top right
-    { top: '68%', left: '85%' },   // bottom right
-    { top: '88%', left: '50%' },   // bottom center
-    { top: '68%', left: '15%' },   // bottom left
-    { top: '28%', left: '15%' },   // top left
-  ];
+  // Calculate positions using trigonometry for perfect centering
+  const getPosition = (index: number, total: number, radius: number) => {
+    const angle = (index * 2 * Math.PI) / total - Math.PI / 2; // Start from top
+    return {
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius,
+    };
+  };
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden" ref={ref}>
-      {/* Decorative */}
+    <section className="py-24 bg-gradient-to-br from-phoenix-gray-light/30 via-background to-phoenix-green-light/20 relative overflow-hidden" ref={ref}>
       <div className="absolute top-20 right-20 text-primary/[0.03] text-[180px] font-bold animate-pound-rotate select-none pointer-events-none">£</div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -50,79 +48,82 @@ const WhyChooseUs = () => {
         </div>
 
         {/* Circular Layout - Desktop */}
-        <div className="hidden lg:block relative max-w-2xl mx-auto" style={{ height: '580px' }}>
-          {/* Orbit ring */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full border-2 border-dashed border-border/40 ${visible ? 'animate-float-up' : 'opacity-0'}`} />
+        <div className="hidden lg:flex justify-center items-center relative" style={{ height: '560px' }}>
+          <div className="relative" style={{ width: '560px', height: '560px' }}>
+            {/* Orbit ring - centered */}
+            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border-2 border-dashed border-border/40 ${visible ? 'animate-float-up' : 'opacity-0'}`} />
 
-          {/* Center circle with logo */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full bg-card border-4 border-border shadow-2xl flex items-center justify-center z-20 ${visible ? 'animate-float-up' : 'opacity-0'}`}>
-            <div className="text-center">
-              <span className="text-2xl font-bold text-primary">Phoenix</span>
-              <span className="block text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-0.5">Finserv</span>
-              <span className="block font-handwritten text-primary text-base mt-1">Helping secure dreams</span>
-            </div>
-          </div>
-
-          {/* Feature items positioned around the circle */}
-          {features.map((feature, index) => {
-            const pos = positions[index];
-            const isHovered = hoveredIdx === index;
-            const isPrimary = feature.color === 'primary';
-
-            return (
-              <div
-                key={feature.title}
-                className={`absolute ${visible ? 'animate-float-up' : 'opacity-0'}`}
-                style={{
-                  top: pos.top,
-                  left: pos.left,
-                  transform: 'translate(-50%, -50%)',
-                  animationDelay: `${index * 0.15 + 0.3}s`,
-                }}
-                onMouseEnter={() => setHoveredIdx(index)}
-                onMouseLeave={() => setHoveredIdx(null)}
-              >
-                <div className="flex flex-col items-center cursor-pointer group">
-                  {/* Icon circle */}
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg
-                    ${isHovered
-                      ? isPrimary ? 'bg-primary scale-125 shadow-primary/30' : 'bg-accent scale-125 shadow-accent/30'
-                      : isPrimary ? 'bg-primary/10 border-2 border-primary/20' : 'bg-accent/10 border-2 border-accent/20'
-                    }
-                  `}>
-                    <feature.icon
-                      size={26}
-                      className={`transition-all duration-300 ${isHovered
-                        ? 'text-primary-foreground scale-110'
-                        : isPrimary ? 'text-primary' : 'text-accent'
-                      }`}
-                    />
-                  </div>
-                  {/* Label */}
-                  <span className={`mt-3 text-xs font-semibold text-center max-w-[120px] leading-tight transition-colors duration-300
-                    ${isHovered ? 'text-primary' : 'text-foreground'}
-                  `}>
-                    {feature.title}
-                  </span>
-                </div>
+            {/* Center circle - perfectly centered */}
+            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full bg-card border-4 border-border shadow-2xl flex items-center justify-center z-20 ${visible ? 'animate-float-up' : 'opacity-0'}`}>
+              <div className="text-center">
+                <span className="text-2xl font-bold text-primary">Phoenix</span>
+                <span className="block text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-0.5">Finserv</span>
+                <span className="block font-handwritten text-primary text-base mt-1">Helping secure dreams</span>
               </div>
-            );
-          })}
+            </div>
 
-          {/* Connector lines from center to items */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-            {positions.map((pos, i) => (
-              <line
-                key={i}
-                x1="50" y1="50"
-                x2={parseFloat(pos.left)} y2={parseFloat(pos.top)}
-                stroke="hsl(var(--border))"
-                strokeWidth="0.3"
-                strokeDasharray="2,2"
-                opacity="0.5"
-              />
-            ))}
-          </svg>
+            {/* Feature items positioned using trigonometry */}
+            {features.map((feature, index) => {
+              const pos = getPosition(index, features.length, 230);
+              const isHovered = hoveredIdx === index;
+              const isPrimary = feature.color === 'primary';
+
+              return (
+                <div
+                  key={feature.title}
+                  className={`absolute ${visible ? 'animate-float-up' : 'opacity-0'}`}
+                  style={{
+                    top: `calc(50% + ${pos.y}px)`,
+                    left: `calc(50% + ${pos.x}px)`,
+                    transform: 'translate(-50%, -50%)',
+                    animationDelay: `${index * 0.15 + 0.3}s`,
+                  }}
+                  onMouseEnter={() => setHoveredIdx(index)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                >
+                  <div className="flex flex-col items-center cursor-pointer group">
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg
+                      ${isHovered
+                        ? isPrimary ? 'bg-primary scale-125 shadow-primary/30' : 'bg-accent scale-125 shadow-accent/30'
+                        : isPrimary ? 'bg-primary/10 border-2 border-primary/20' : 'bg-accent/10 border-2 border-accent/20'
+                      }
+                    `}>
+                      <feature.icon
+                        size={26}
+                        className={`transition-all duration-300 ${isHovered
+                          ? 'text-primary-foreground scale-110'
+                          : isPrimary ? 'text-primary' : 'text-accent'
+                        }`}
+                      />
+                    </div>
+                    <span className={`mt-3 text-xs font-semibold text-center max-w-[120px] leading-tight transition-colors duration-300
+                      ${isHovered ? 'text-primary' : 'text-foreground'}
+                    `}>
+                      {feature.title}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Connector lines */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              {features.map((_, i) => {
+                const pos = getPosition(i, features.length, 230);
+                return (
+                  <line
+                    key={i}
+                    x1="280" y1="280"
+                    x2={280 + pos.x} y2={280 + pos.y}
+                    stroke="hsl(var(--border))"
+                    strokeWidth="1"
+                    strokeDasharray="4,4"
+                    opacity="0.4"
+                  />
+                );
+              })}
+            </svg>
+          </div>
         </div>
 
         {/* Mobile grid */}
@@ -153,7 +154,7 @@ const WhyChooseUs = () => {
 
         {/* CTA */}
         <div className={`text-center mt-14 ${visible ? 'animate-float-up' : 'opacity-0'}`} style={{ animationDelay: '1.2s' }}>
-          <a href="#contact" className="inline-flex items-center gap-2 bg-primary hover:bg-phoenix-orange-dark text-primary-foreground font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+          <a href="/contact" className="inline-flex items-center gap-2 bg-primary hover:bg-phoenix-orange-dark text-primary-foreground font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
             Get a Quote
           </a>
         </div>

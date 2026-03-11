@@ -1,24 +1,8 @@
-import { ArrowRight, Building2, Users, TrendingUp, Lightbulb, Rocket, Globe } from "lucide-react";
+import { ArrowRight, Compass, Sprout, Map, Gem, Users, AlertTriangle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyGetInTouch from "@/components/StickyGetInTouch";
 import { useEffect, useRef, useState } from "react";
-
-const timeline = [
-  { year: "2013", title: "Our Beginnings", description: "Manish Shah formed Phoenix Accountancy Service Ltd along with Mayuri Patel, after realising that it is not just the size and scale of a business that determines the level of service delivered to clients but more the ability to meet and manage clients' requirements and expectations.", icon: Building2 },
-  { year: "2015", title: "Growing Through Referrals", description: "The accountancy company grew through recommendations and referrals for the world class service given by longstanding loyal staff at Phoenix.", icon: Users },
-  { year: "2018", title: "Expanding Services", description: "Phoenix Accountancy focuses on offering hands-on and tailored financial support through proactive tax advice and accountancy services to businesses, individuals, contractors, and SMEs.", icon: TrendingUp },
-  { year: "2020", title: "Digital Transformation", description: "Embracing innovative technology and digital solutions to serve our clients better, streamlining processes and improving communication.", icon: Lightbulb },
-  { year: "2023", title: "Phoenix Finserv Launch", description: "Expanding into comprehensive financial services including protection, mortgages, pensions, and estate planning — helping secure our clients' dreams.", icon: Rocket },
-  { year: "2026", title: "Today & Beyond", description: "Phoenix Accountancy is an accounting firm with a difference that stands out from the crowd. We develop and build a bond with clients by implementing strong business structures and plans to help them save time and money.", icon: Globe },
-];
-
-const stats = [
-  { number: "10+", label: "Years of Excellence" },
-  { number: "1000+", label: "Businesses Helped" },
-  { number: "50+", label: "Expert Advisors" },
-  { number: "98%", label: "Client Satisfaction" },
-];
 
 const AnimatedSection = ({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const [visible, setVisible] = useState(false);
@@ -35,158 +19,110 @@ const AnimatedSection = ({ children, className = "", delay = 0 }: { children: Re
   );
 };
 
-const OurJourney = () => {
-  const [activeTimeline, setActiveTimeline] = useState<number | null>(null);
+const journeySteps = [
+  {
+    num: "01",
+    icon: Compass,
+    title: "Your Voyage",
+    description: "In Phoenix, we view your business as an expedition. Whether you are embarking on this expedition, standing at a crucial juncture, contemplating your path forward, or contemplating its conclusion, we are here to be your steadfast companions throughout the entire voyage.",
+    color: "primary" as const,
+  },
+  {
+    num: "02",
+    icon: Sprout,
+    title: "New Beginnings?",
+    description: "Have you recently made the decision to embark on your entrepreneurial journey and find yourself feeling swamped with uncertainty about what steps to take next? Don't worry; we are here to provide assistance. From assisting with company registrations and self-employment formalities to offering expert guidance and unwavering support to help steer you in the right direction.",
+    color: "accent" as const,
+  },
+  {
+    num: "03",
+    icon: Map,
+    title: "On the Path Require Guidance?",
+    description: "Our proficient team is committed to delivering top-notch services, encompassing everything from meticulous bookkeeping and efficient VAT handling to precise payroll management and adept handling of Corporation tax and self-assessment matters. You can rest assured that we have all your needs covered comprehensively.",
+    color: "primary" as const,
+  },
+  {
+    num: "04",
+    icon: Gem,
+    title: "Valuable Additions for Your Journey",
+    description: "We at Phoenix believe in making your financial journey not just manageable but truly enriching. Our commitment goes beyond numbers; it's about adding value to your financial path. From navigating tax complexities to strategic financial planning, we've got your back at every turn.",
+    color: "accent" as const,
+  },
+  {
+    num: "05",
+    icon: Users,
+    title: "Companions Throughout Your Journey",
+    description: "Our Partners and the Partner Hub are here to provide assistance beyond the realm of accounting. With expertise spanning various industries, our partners are readily available to support you when your needs extend beyond accounting alone.",
+    color: "primary" as const,
+  },
+  {
+    num: "06",
+    icon: AlertTriangle,
+    title: "Your Business Near in Failure?",
+    description: "If you find yourself at the conclusion of your business journey, rest assured, we are here to assist you in concluding your affairs with ease. Whether you seek a final business valuation for potential sale or require guidance on liquidation and the winding-down process, we stand ready to support you.",
+    color: "accent" as const,
+  },
+];
 
+const OurJourney = () => {
   return (
     <div className="min-h-screen">
       <Header />
       <main>
-        {/* Hero - Light gradient */}
+        {/* Hero */}
         <section className="relative py-24 bg-gradient-to-br from-phoenix-gray-light via-background to-phoenix-green-light overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.08),transparent_60%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--accent)/0.06),transparent_50%)]" />
           <div className="absolute bottom-20 right-20 text-primary/5 text-[180px] font-bold animate-pound-rotate select-none pointer-events-none">£</div>
-          <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-primary/5 animate-pound-morph pointer-events-none" />
           <div className="container mx-auto px-4 relative z-10 text-center">
             <AnimatedSection>
-              <p className="text-primary font-semibold text-sm uppercase tracking-[0.25em] mb-4">Our Story</p>
+              <p className="text-primary font-semibold text-sm uppercase tracking-[0.25em] mb-4">Your Journey</p>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
                 The Phoenix <span className="font-handwritten text-5xl md:text-6xl text-primary pen-underline">Journey</span>
               </h1>
               <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-                From humble beginnings to a trusted financial services firm — our story of <span className="font-handwritten text-xl text-primary highlighter-mark">growth</span>, <span className="font-handwritten text-xl text-accent highlighter-mark">trust</span>, and excellence.
+                Your business is an <span className="font-handwritten text-xl text-primary highlighter-mark">expedition</span> — and we are your steadfast companions throughout the entire voyage.
               </p>
             </AnimatedSection>
           </div>
         </section>
 
-        {/* Stats Bar */}
-        <section className="py-8 bg-primary">
+        {/* Journey Steps */}
+        <section className="py-20 bg-gradient-to-b from-background via-phoenix-green-light/10 to-phoenix-gray-light/30">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {stats.map((stat, i) => (
-                <AnimatedSection key={stat.label} delay={i * 0.1} className="text-center">
-                  <p className="text-3xl md:text-4xl font-bold text-primary-foreground font-handwritten">{stat.number}</p>
-                  <p className="text-primary-foreground/80 text-sm mt-1">{stat.label}</p>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
+            <div className="max-w-4xl mx-auto relative">
+              {/* Vertical connector line */}
+              <div className="hidden md:block absolute left-[2.75rem] top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-primary to-accent/20" />
 
-        {/* About Block - Redesigned */}
-        <section className="py-20 bg-gradient-to-br from-background via-phoenix-green-light/20 to-phoenix-gray-light">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <AnimatedSection>
-                <div className="text-center mb-12">
-                  <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Where It All Started</p>
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                    Our <span className="font-handwritten text-4xl md:text-5xl text-primary highlighter-mark">Beginnings</span>
-                  </h2>
-                </div>
-              </AnimatedSection>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Key highlight cards */}
-                <AnimatedSection delay={0.1}>
-                  <div className="bg-card border border-border rounded-2xl p-8 hover:shadow-xl hover:border-primary/30 transition-all duration-500 group h-full">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                      <Building2 size={24} className="text-primary group-hover:text-primary-foreground transition-colors" />
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">The <span className="highlighter-mark">Vision</span></h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                      Manish Shah formed Phoenix Accountancy Service Ltd in <span className="font-semibold text-primary">2013</span> along with Mayuri Patel, realising that the <span className="font-handwritten text-base text-accent">ability to meet and manage clients' requirements</span> matters more than size and scale.
-                    </p>
-                  </div>
-                </AnimatedSection>
-
-                <AnimatedSection delay={0.2}>
-                  <div className="bg-card border border-border rounded-2xl p-8 hover:shadow-xl hover:border-accent/30 transition-all duration-500 group h-full">
-                    <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:scale-110 transition-all duration-300">
-                      <Users size={24} className="text-accent group-hover:text-accent-foreground transition-colors" />
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">The <span className="highlighter-mark">Approach</span></h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                      Phoenix focuses on offering <span className="font-handwritten text-base text-primary">hands-on and tailored financial support</span> through proactive tax advice and accountancy services to businesses, individuals, contractors, and SMEs.
-                    </p>
-                  </div>
-                </AnimatedSection>
-
-                <AnimatedSection delay={0.3}>
-                  <div className="bg-card border border-border rounded-2xl p-8 hover:shadow-xl hover:border-primary/30 transition-all duration-500 group h-full">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                      <TrendingUp size={24} className="text-primary group-hover:text-primary-foreground transition-colors" />
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">The <span className="highlighter-mark">Growth</span></h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                      The company has grown over the last decade through <span className="font-handwritten text-base text-accent">recommendations and referrals</span> for the world class service given by longstanding loyal staff at Phoenix.
-                    </p>
-                  </div>
-                </AnimatedSection>
-
-                <AnimatedSection delay={0.4}>
-                  <div className="bg-card border border-border rounded-2xl p-8 hover:shadow-xl hover:border-accent/30 transition-all duration-500 group h-full">
-                    <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:scale-110 transition-all duration-300">
-                      <Lightbulb size={24} className="text-accent group-hover:text-accent-foreground transition-colors" />
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">The <span className="highlighter-mark">Difference</span></h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                      Manish had worked as a <span className="font-semibold text-primary">CFO for 7 years</span>, helping complete the successful sale of a business. Phoenix is an accounting firm with a difference that <span className="font-handwritten text-base text-primary">stands out from the crowd</span>.
-                    </p>
-                  </div>
-                </AnimatedSection>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Timeline - Redesigned */}
-        <section className="py-20 bg-gradient-to-b from-phoenix-gray-light via-background to-phoenix-green-light/10">
-          <div className="container mx-auto px-4">
-            <AnimatedSection className="text-center mb-16">
-              <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Milestones</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                Our <span className="font-handwritten text-4xl md:text-5xl text-primary pen-underline">Timeline</span>
-              </h2>
-            </AnimatedSection>
-
-            <div className="relative max-w-4xl mx-auto">
-              {/* Vertical line */}
-              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-primary to-accent/20 md:-translate-x-px" />
-
-              <div className="space-y-16">
-                {timeline.map((item, index) => {
-                  const isLeft = index % 2 === 0;
-                  const Icon = item.icon;
-                  const isActive = activeTimeline === index;
-
+              <div className="space-y-12">
+                {journeySteps.map((step, i) => {
+                  const isPrimary = step.color === "primary";
+                  const Icon = step.icon;
                   return (
-                    <AnimatedSection
-                      key={item.year}
-                      delay={index * 0.15}
-                      className="relative flex items-start"
-                    >
-                      {/* Dot with icon */}
-                      <div
-                        className={`absolute left-8 md:left-1/2 -translate-x-1/2 z-10 cursor-pointer transition-all duration-500 ${isActive ? 'scale-125' : 'hover:scale-110'}`}
-                        onMouseEnter={() => setActiveTimeline(index)}
-                        onMouseLeave={() => setActiveTimeline(null)}
-                      >
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-500 ${isActive ? 'bg-primary shadow-primary/40' : 'bg-card border-2 border-primary'}`}>
-                          <Icon size={18} className={`transition-colors duration-300 ${isActive ? 'text-primary-foreground' : 'text-primary'}`} />
+                    <AnimatedSection key={step.num} delay={i * 0.12}>
+                      <div className="flex items-start gap-6 group">
+                        {/* Step number circle */}
+                        <div className={`hidden md:flex w-[5.5rem] h-[5.5rem] rounded-2xl items-center justify-center font-bold text-2xl shrink-0 z-10 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 ${isPrimary ? 'bg-primary text-primary-foreground group-hover:shadow-primary/30' : 'bg-accent text-accent-foreground group-hover:shadow-accent/30'}`}>
+                          {step.num}
                         </div>
-                      </div>
 
-                      {/* Content */}
-                      <div className={`ml-20 md:ml-0 md:w-[44%] ${isLeft ? 'md:mr-auto md:pr-16 md:text-right' : 'md:ml-auto md:pl-16'}`}>
-                        <div className={`bg-card border border-border rounded-2xl p-6 transition-all duration-500 hover:shadow-xl group ${isActive ? 'shadow-xl border-primary/30' : 'hover:border-primary/20'}`}>
-                          <span className="inline-block font-handwritten text-2xl text-primary font-bold mb-1">{item.year}</span>
-                          <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                            {item.title}
-                          </h3>
-                          <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                        {/* Content card */}
+                        <div className={`flex-1 bg-card border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-xl relative overflow-hidden ${isPrimary ? 'hover:border-primary/30' : 'hover:border-accent/30'}`}>
+                          {/* Top accent line */}
+                          <div className={`absolute top-0 left-0 w-full h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ${isPrimary ? 'bg-primary' : 'bg-accent'}`} />
+                          
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${isPrimary ? 'bg-primary/10 group-hover:bg-primary' : 'bg-accent/10 group-hover:bg-accent'}`}>
+                              <Icon size={20} className={`transition-colors ${isPrimary ? 'text-primary group-hover:text-primary-foreground' : 'text-accent group-hover:text-accent-foreground'}`} />
+                            </div>
+                            <div>
+                              <span className="md:hidden font-handwritten text-lg text-primary font-bold mr-2">{step.num}.</span>
+                              <h3 className={`text-xl font-bold text-foreground transition-colors inline ${isPrimary ? 'group-hover:text-primary' : 'group-hover:text-accent'}`}>
+                                {step.title}
+                              </h3>
+                            </div>
+                          </div>
+                          <p className="text-muted-foreground leading-relaxed text-sm">{step.description}</p>
                         </div>
                       </div>
                     </AnimatedSection>
