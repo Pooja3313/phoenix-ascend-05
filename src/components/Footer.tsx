@@ -5,7 +5,20 @@ const Footer = () => {
   const [email, setEmail] = useState("");
 
   const serviceLinks = ["Protection", "Mortgage", "Commercial Lending", "Pensions", "Wills & Estate Planning"];
-  const quickLinks = ["Home", "About Us", "Your Journey", "Blog", "Contact", "Privacy Policy", "Terms of Service"];
+  const quickLinks = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/#about" },
+    { name: "Your Journey", href: "/our-journey" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" },
+    { name: "Refer a Friend", href: "/refer-a-friend" },
+  ];
+  const policyLinks = [
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
+    { name: "Complaints Procedure", href: "/complaints-procedure" },
+    { name: "Fair Treatment of Customers", href: "/fair-treatment" },
+  ];
 
   return (
     <footer className="relative bg-phoenix-gray-dark text-primary-foreground overflow-hidden">
