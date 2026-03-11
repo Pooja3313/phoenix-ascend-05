@@ -130,6 +130,29 @@ const Header = () => {
               </a>
             ))}
 
+            {/* Join Our Network dropdown */}
+            <div className="relative shrink-0 group">
+              <a
+                href="/network"
+                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap"
+              >
+                Join Our Network
+                <ChevronDown size={14} className="transition-transform duration-200 group-hover:rotate-180" />
+              </a>
+              <div className="absolute top-full left-0 mt-0 w-64 bg-card rounded-xl shadow-2xl border border-border overflow-hidden z-[60] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                {networkDropdown.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="block px-5 py-3 text-sm text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 hover:translate-x-1"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+                <div className="h-0.5 bg-gradient-to-r from-primary via-accent to-phoenix-gold" />
+              </div>
+            </div>
+
             {/* Services with tabs dropdown */}
             <div
               className="relative shrink-0"
