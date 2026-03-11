@@ -128,6 +128,18 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Policy Links Bar */}
+        <div className="border-t border-primary-foreground/10 pt-6 pb-4">
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            {policyLinks.map((link) => (
+              <a key={link.name} href={link.href} className="flex items-center gap-2 text-xs text-primary-foreground/50 hover:text-primary transition-colors">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="border-t border-primary-foreground/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-primary-foreground/40">© {new Date().getFullYear()} Phoenix Finserv. All rights reserved.</p>
