@@ -47,7 +47,6 @@ const services = [
 ];
 
 const networkDropdown = [
-  { name: "Appointed Representative", href: "/network/appointed-representative" },
   { name: "Self Employed Adviser", href: "/network/self-employed-adviser" },
   { name: "Introducer", href: "/network/introducer" },
 ];
