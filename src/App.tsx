@@ -30,9 +30,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/network" element={<Network />} />
-          <Route path="/network/appointed-representative" element={<NetworkAppointedRepresentative />} />
           <Route path="/network/introducer" element={<NetworkIntroducer />} />
           <Route path="/network/self-employed-adviser" element={<NetworkSelfEmployedAdviser />} />
+          <Route path="/financial-ombudsman-service" element={<FinancialOmbudsman />} />
+          <Route path="/newsletter" element={<Newsletter />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/our-journey" element={<OurJourney />} />

@@ -25,6 +25,15 @@ const Footer = () => {
     <footer className="relative bg-phoenix-gray-dark text-primary-foreground overflow-hidden">
       {/* Animated top line */}
       <div className="glow-line h-1 bg-gradient-to-r from-primary via-accent to-phoenix-gold" />
+      
+      {/* Animated color particles */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute w-2 h-2 rounded-full bg-primary/20 animate-bounce" style={{ top: '20%', left: '10%', animationDuration: '3s', animationDelay: '0s' }} />
+        <div className="absolute w-1.5 h-1.5 rounded-full bg-accent/20 animate-bounce" style={{ top: '60%', left: '80%', animationDuration: '4s', animationDelay: '1s' }} />
+        <div className="absolute w-2.5 h-2.5 rounded-full bg-phoenix-gold/15 animate-bounce" style={{ top: '40%', left: '50%', animationDuration: '3.5s', animationDelay: '0.5s' }} />
+        <div className="absolute w-1 h-1 rounded-full bg-primary/15 animate-bounce" style={{ top: '80%', left: '30%', animationDuration: '5s', animationDelay: '2s' }} />
+        <div className="absolute w-2 h-2 rounded-full bg-accent/15 animate-bounce" style={{ top: '10%', left: '70%', animationDuration: '4.5s', animationDelay: '1.5s' }} />
+      </div>
 
       {/* Background effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-40 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
