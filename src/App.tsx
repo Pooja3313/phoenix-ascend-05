@@ -14,9 +14,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ComplaintsProcedure from "./pages/ComplaintsProcedure";
 import FairTreatment from "./pages/FairTreatment";
 import ReferAFriend from "./pages/ReferAFriend";
-import NetworkAppointedRepresentative from "./pages/NetworkAppointedRepresentative";
 import NetworkIntroducer from "./pages/NetworkIntroducer";
 import NetworkSelfEmployedAdviser from "./pages/NetworkSelfEmployedAdviser";
+import FinancialOmbudsman from "./pages/FinancialOmbudsman";
+import Newsletter from "./pages/Newsletter";
 
 const queryClient = new QueryClient();
 
