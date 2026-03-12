@@ -47,7 +47,6 @@ const services = [
 ];
 
 const networkDropdown = [
-  { name: "Appointed Representative", href: "/network/appointed-representative" },
   { name: "Self Employed Adviser", href: "/network/self-employed-adviser" },
   { name: "Introducer", href: "/network/introducer" },
 ];
@@ -58,7 +57,7 @@ const navLinks = [
   { name: "Your Journey", href: "/our-journey" },
   { name: "Refer a Friend", href: "/refer-a-friend" },
   { name: "Careers", href: "/careers" },
-  { name: "Newsletter", href: "/#newsletter" },
+  { name: "Newsletter", href: "/newsletter" },
 ];
 
 const Header = () => {
