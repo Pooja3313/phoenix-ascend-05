@@ -18,6 +18,7 @@ const Footer = () => {
     { name: "Terms & Conditions", href: "/terms-and-conditions" },
     { name: "Complaints Procedure", href: "/complaints-procedure" },
     { name: "Fair Treatment of Customers", href: "/fair-treatment" },
+    { name: "Financial Ombudsman Service", href: "/financial-ombudsman-service" },
   ];
 
   return (
