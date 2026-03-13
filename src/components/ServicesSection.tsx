@@ -1,5 +1,6 @@
 import { ShieldCheck, Home, Building2, PiggyBank, FileText, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const services = [
   {
@@ -7,30 +8,35 @@ const services = [
     title: "Protection",
     description: "Comprehensive life insurance, critical illness cover, and income protection to safeguard your family's future.",
     color: "primary" as const,
+    href: "/services/protection",
   },
   {
     icon: Home,
     title: "Mortgage",
     description: "Expert mortgage advice for first-time buyers, remortgages, buy-to-let, and commercial properties.",
     color: "accent" as const,
+    href: "/services/mortgage",
   },
   {
     icon: Building2,
     title: "Commercial Lending",
     description: "Tailored business loans, asset finance, invoice finance, and property development funding.",
     color: "primary" as const,
+    href: "/services/commercial-lending",
   },
   {
     icon: PiggyBank,
     title: "Pensions",
     description: "Personal and workplace pensions, SIPPs, pension drawdown, and transfer services for a secure retirement.",
     color: "accent" as const,
+    href: "/services/pensions",
   },
   {
     icon: FileText,
     title: "Wills & Estate Planning",
     description: "Professional will writing, trusts, power of attorney, and inheritance tax planning services.",
     color: "primary" as const,
+    href: "/services/wills-estate-planning",
   },
 ];
 
@@ -75,10 +81,8 @@ const ServicesSection = () => {
                 onMouseEnter={() => setHoveredIdx(index)}
                 onMouseLeave={() => setHoveredIdx(null)}
               >
-                {/* Top accent bar */}
                 <div className={`absolute top-0 left-0 w-full h-1 transform transition-transform duration-500 origin-left ${isHovered ? 'scale-x-100' : 'scale-x-0'} ${isPrimary ? 'bg-primary' : 'bg-accent'}`} />
 
-                {/* Icon */}
                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ${
                   isPrimary ? 'bg-primary/10 group-hover:bg-primary' : 'bg-accent/10 group-hover:bg-accent'
                 }`}>
@@ -93,11 +97,11 @@ const ServicesSection = () => {
                   {service.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-5">{service.description}</p>
-                <a href="#" className={`inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all ${
+                <NavLink to={service.href} className={`inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all ${
                   isPrimary ? 'text-primary' : 'text-accent'
                 }`}>
                   Learn More <ArrowRight size={16} />
-                </a>
+                </NavLink>
               </div>
             );
           })}

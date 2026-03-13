@@ -18,6 +18,11 @@ import NetworkIntroducer from "./pages/NetworkIntroducer";
 import NetworkSelfEmployedAdviser from "./pages/NetworkSelfEmployedAdviser";
 import FinancialOmbudsman from "./pages/FinancialOmbudsman";
 import Newsletter from "./pages/Newsletter";
+import Protection from "./pages/services/Protection";
+import Mortgage from "./pages/services/Mortgage";
+import CommercialLending from "./pages/services/CommercialLending";
+import Pensions from "./pages/services/Pensions";
+import WillsEstatePlanning from "./pages/services/WillsEstatePlanning";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +47,11 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/complaints-procedure" element={<ComplaintsProcedure />} />
           <Route path="/fair-treatment" element={<FairTreatment />} />
+          <Route path="/services/protection" element={<Protection />} />
+          <Route path="/services/mortgage" element={<Mortgage />} />
+          <Route path="/services/commercial-lending" element={<CommercialLending />} />
+          <Route path="/services/pensions" element={<Pensions />} />
+          <Route path="/services/wills-estate-planning" element={<WillsEstatePlanning />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

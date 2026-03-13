@@ -24,14 +24,18 @@ const WhyChooseUs = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Calculate positions using trigonometry for perfect centering
   const getPosition = (index: number, total: number, radius: number) => {
-    const angle = (index * 2 * Math.PI) / total - Math.PI / 2; // Start from top
+    const angle = (index * 2 * Math.PI) / total - Math.PI / 2;
     return {
       x: Math.cos(angle) * radius,
       y: Math.sin(angle) * radius,
     };
   };
+
+  const containerSize = 520;
+  const center = containerSize / 2;
+  const orbitRadius = 200;
+  const centerCircleSize = 160;
 
   return (
     <section className="py-24 bg-gradient-to-br from-phoenix-gray-light/30 via-background to-phoenix-green-light/20 relative overflow-hidden" ref={ref}>
@@ -48,13 +52,29 @@ const WhyChooseUs = () => {
         </div>
 
         {/* Circular Layout - Desktop */}
-        <div className="hidden lg:flex justify-center items-center relative" style={{ height: '560px' }}>
-          <div className="relative" style={{ width: '560px', height: '560px' }}>
-            {/* Orbit ring - centered */}
-            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border-2 border-dashed border-border/40 ${visible ? 'animate-float-up' : 'opacity-0'}`} />
+        <div className="hidden lg:flex justify-center items-center">
+          <div className="relative" style={{ width: `${containerSize}px`, height: `${containerSize}px` }}>
+            {/* Orbit ring */}
+            <div
+              className={`absolute rounded-full border-2 border-dashed border-border/40 ${visible ? 'animate-float-up' : 'opacity-0'}`}
+              style={{
+                width: `${orbitRadius * 2}px`,
+                height: `${orbitRadius * 2}px`,
+                top: `${center - orbitRadius}px`,
+                left: `${center - orbitRadius}px`,
+              }}
+            />
 
-            {/* Center circle - perfectly centered */}
-            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full bg-card border-4 border-border shadow-2xl flex items-center justify-center z-20 ${visible ? 'animate-float-up' : 'opacity-0'}`}>
+            {/* Center circle */}
+            <div
+              className={`absolute rounded-full bg-card border-4 border-border shadow-2xl flex items-center justify-center z-20 ${visible ? 'animate-float-up' : 'opacity-0'}`}
+              style={{
+                width: `${centerCircleSize}px`,
+                height: `${centerCircleSize}px`,
+                top: `${center - centerCircleSize / 2}px`,
+                left: `${center - centerCircleSize / 2}px`,
+              }}
+            >
               <div className="text-center">
                 <span className="text-2xl font-bold text-primary">Phoenix</span>
                 <span className="block text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-0.5">Finserv</span>
@@ -62,9 +82,9 @@ const WhyChooseUs = () => {
               </div>
             </div>
 
-            {/* Feature items positioned using trigonometry */}
+            {/* Feature items */}
             {features.map((feature, index) => {
-              const pos = getPosition(index, features.length, 230);
+              const pos = getPosition(index, features.length, orbitRadius);
               const isHovered = hoveredIdx === index;
               const isPrimary = feature.color === 'primary';
 
@@ -73,8 +93,8 @@ const WhyChooseUs = () => {
                   key={feature.title}
                   className={`absolute ${visible ? 'animate-float-up' : 'opacity-0'}`}
                   style={{
-                    top: `calc(50% + ${pos.y}px)`,
-                    left: `calc(50% + ${pos.x}px)`,
+                    top: `${center + pos.y}px`,
+                    left: `${center + pos.x}px`,
                     transform: 'translate(-50%, -50%)',
                     animationDelay: `${index * 0.15 + 0.3}s`,
                   }}
@@ -109,12 +129,12 @@ const WhyChooseUs = () => {
             {/* Connector lines */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               {features.map((_, i) => {
-                const pos = getPosition(i, features.length, 230);
+                const pos = getPosition(i, features.length, orbitRadius);
                 return (
                   <line
                     key={i}
-                    x1="280" y1="280"
-                    x2={280 + pos.x} y2={280 + pos.y}
+                    x1={center} y1={center}
+                    x2={center + pos.x} y2={center + pos.y}
                     stroke="hsl(var(--border))"
                     strokeWidth="1"
                     strokeDasharray="4,4"
@@ -152,7 +172,6 @@ const WhyChooseUs = () => {
           })}
         </div>
 
-        {/* CTA */}
         <div className={`text-center mt-14 ${visible ? 'animate-float-up' : 'opacity-0'}`} style={{ animationDelay: '1.2s' }}>
           <a href="/contact" className="inline-flex items-center gap-2 bg-primary hover:bg-phoenix-orange-dark text-primary-foreground font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
             Get a Quote

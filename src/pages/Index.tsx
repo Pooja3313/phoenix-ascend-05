@@ -9,6 +9,7 @@ import PoundAnimation from "@/components/PoundAnimation";
 import TestimonialSection from "@/components/TestimonialSection";
 import DedicatedTeam from "@/components/DedicatedTeam";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import LogoSlider from "@/components/LogoSlider";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import StickyGetInTouch from "@/components/StickyGetInTouch";
@@ -28,6 +29,7 @@ const Index = () => {
         <PoundAnimation />
         <TestimonialSection />
         <DedicatedTeam />
+        <LogoSlider />
         <WhyChooseUs />
         <CTASection />
       </main>
