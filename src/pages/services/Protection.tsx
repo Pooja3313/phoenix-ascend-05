@@ -1,48 +1,30 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyGetInTouch from "@/components/StickyGetInTouch";
-import { ShieldCheck, Users, Home, Briefcase, FileCheck, Heart, Shield, ArrowRight } from "lucide-react";
+import { ShieldCheck, Users, Home, Briefcase, FileCheck, Heart, Shield, ArrowRight, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { personalProtectionServices, businessProtectionServices, homeInsuranceServices } from "@/data/protectionData";
 
-const offerings = [
-  {
-    icon: Shield,
-    title: "Keyman Cover",
-    description: "It protects against risks, enhancing company stability amidst critical staff changes. Keyman cover ensures your business can weather the storm if a key individual is unable to work.",
-  },
-  {
-    icon: Users,
-    title: "Shareholder Protection",
-    description: "Ensures business continuity and financial security in unforeseen events. Shareholder protection provides the means to buy out a deceased or critically ill partner's shares.",
-  },
-  {
-    icon: Briefcase,
-    title: "Relevant Life Cover",
-    description: "Tax-efficient life insurance for company directors and employees. A cost-effective way for businesses to provide death-in-service benefits outside of a registered group life scheme.",
-  },
-  {
-    icon: FileCheck,
-    title: "Business Loan Protection",
-    description: "Provides financial protection against losses, ensuring business loans are covered if a key individual passes away or becomes critically ill.",
-  },
-  {
-    icon: Heart,
-    title: "Life Cover",
-    description: "Protect your family's financial future with comprehensive life insurance that pays out a lump sum or regular income upon death, providing essential support when it matters most.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Critical Illness Cover",
-    description: "Receive a tax-free lump sum if you're diagnosed with a specified critical illness, helping you focus on recovery without worrying about finances.",
-  },
-  {
-    icon: Home,
-    title: "Income Protection",
-    description: "Replace a portion of your income if you're unable to work due to illness or injury, ensuring your financial commitments are met during difficult times.",
-  },
+const tabs = [
+  { name: "Personal Protection", services: personalProtectionServices, color: "primary" },
+  { name: "Business Protection", services: businessProtectionServices, color: "accent" },
+  { name: "Home Insurance", services: homeInsuranceServices, color: "primary" },
 ];
 
+const iconMap: Record<string, React.ElementType> = {
+  "life-cover": Heart,
+  "critical-illness": ShieldCheck,
+  "income-protection": Shield,
+  "keyman-cover": Briefcase,
+  "shareholder-protection": Users,
+  "relevant-life-cover": FileCheck,
+  "business-loan-protection": Briefcase,
+  "buildings-and-contents": Home,
+};
+
 const Protection = () => {
+  const [activeTab, setActiveTab] = useState(0);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -62,6 +44,7 @@ const Protection = () => {
         {/* Hero */}
         <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary/10 via-phoenix-green-light/30 to-background overflow-hidden">
           <div className="absolute top-10 right-10 text-primary/[0.04] text-[200px] font-bold animate-pound-rotate select-none pointer-events-none">£</div>
+          <div className="absolute bottom-10 left-10 w-4 h-4 rounded-full bg-accent/20 animate-bounce" style={{ animationDelay: '0.5s' }} />
           <div className="container mx-auto px-4 relative z-10">
             <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Our Services</p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
@@ -92,8 +75,11 @@ const Protection = () => {
                 </p>
               </div>
               <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-border flex items-center justify-center">
-                  <ShieldCheck size={80} className="text-primary/30" />
+                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-dashed border-border flex flex-col items-center justify-center gap-4">
+                  <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <ShieldCheck size={40} className="text-primary/40" />
+                  </div>
+                  <p className="text-muted-foreground/50 text-sm">Image Coming Soon</p>
                 </div>
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
                   <Heart size={32} className="text-accent" />
@@ -103,10 +89,10 @@ const Protection = () => {
           </div>
         </section>
 
-        {/* What We Offer */}
+        {/* What We Offer - Tabbed */}
         <section className="py-20 bg-gradient-to-br from-phoenix-gray-light/50 via-background to-phoenix-green-light/30" ref={ref}>
           <div className="container mx-auto px-4">
-            <div className="text-center mb-14">
+            <div className="text-center mb-10">
               <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">What We Offer</p>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                 Comprehensive <span className="font-handwritten text-4xl md:text-5xl text-primary highlighter-mark">Protection</span> Solutions
@@ -115,23 +101,49 @@ const Protection = () => {
                 Protection planning is about creating a financial safety net that ensures you, your family, or your business are supported in the face of life's uncertainties.
               </p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {offerings.map((item, index) => (
-                <div
-                  key={item.title}
-                  className={`group relative bg-card border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-xl overflow-hidden cursor-pointer hover:border-primary/30 ${
-                    visible ? 'animate-float-up' : 'opacity-0'
+
+            {/* Tabs */}
+            <div className="flex flex-wrap justify-center gap-2 mb-10">
+              {tabs.map((tab, i) => (
+                <button
+                  key={tab.name}
+                  onClick={() => { setActiveTab(i); setVisible(true); }}
+                  className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    activeTab === i
+                      ? 'bg-primary text-primary-foreground shadow-lg scale-105'
+                      : 'bg-card border border-border text-foreground hover:border-primary/30 hover:text-primary'
                   }`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="absolute top-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <item.icon size={26} className="text-primary group-hover:text-primary-foreground transition-colors" />
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                </div>
+                  {tab.name}
+                </button>
               ))}
+            </div>
+
+            {/* Cards */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto" key={activeTab}>
+              {tabs[activeTab].services.map((item, index) => {
+                const Icon = iconMap[item.slug] || Shield;
+                return (
+                  <NavLink
+                    key={item.slug}
+                    to={`/services/protection/${item.slug}`}
+                    className={`group relative bg-card border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-xl overflow-hidden hover:border-primary/30 block ${
+                      visible ? 'animate-float-up' : 'opacity-0'
+                    }`}
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                      <Icon size={26} className="text-primary group-hover:text-primary-foreground transition-colors" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">{item.heroDescription}</p>
+                    <div className="flex items-center gap-1 mt-4 text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Learn More <ChevronRight size={16} />
+                    </div>
+                  </NavLink>
+                );
+              })}
             </div>
           </div>
         </section>

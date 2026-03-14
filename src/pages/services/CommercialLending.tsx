@@ -1,41 +1,19 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyGetInTouch from "@/components/StickyGetInTouch";
-import { Building2, Landmark, Briefcase, Truck, Home, HardHat, ArrowRight } from "lucide-react";
+import { Building2, Landmark, Briefcase, Truck, Home, HardHat, ArrowRight, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { commercialLendingServices } from "@/data/commercialLendingData";
 
-const offerings = [
-  {
-    icon: Landmark,
-    title: "Bridging Loans",
-    description: "Explore bridging loans with Phoenix Finserv for quick access to capital for property purchases, renovations or investments. Short-term financing to bridge the gap between transactions.",
-  },
-  {
-    icon: Building2,
-    title: "Commercial Mortgage",
-    description: "Unlock growth opportunities with commercial mortgages. Access financing for business premises, whether owner-occupied or investment properties, with competitive rates and flexible terms.",
-  },
-  {
-    icon: Briefcase,
-    title: "Business Finance",
-    description: "Secure tailored business loans for your needs, ideal for growth and expansion. Unlock capital for your business today with flexible repayment options suited to your cash flow.",
-  },
-  {
-    icon: Truck,
-    title: "Asset Finance",
-    description: "Access asset finance solutions for your business needs, from equipment purchases to vehicle leasing. Drive your business forward with ease and preserve your working capital.",
-  },
-  {
-    icon: Home,
-    title: "Buy to Let Finance",
-    description: "Discover buy-to-let finance options for property investments. Secure financing tailored to your unique rental property goals and portfolio expansion plans.",
-  },
-  {
-    icon: HardHat,
-    title: "Property Development Finance",
-    description: "Explore property development finance options tailored to your projects. Secure funding for your development plans effortlessly, from ground-up builds to conversions.",
-  },
-];
+const iconMap: Record<string, React.ElementType> = {
+  "bridging-loan": Landmark,
+  "commercial-mortgage": Building2,
+  "business-finance": Briefcase,
+  "asset-finance": Truck,
+  "buy-to-let-finance": Home,
+  "property-development-finance": HardHat,
+};
 
 const CommercialLending = () => {
   const [visible, setVisible] = useState(false);
@@ -92,8 +70,11 @@ const CommercialLending = () => {
                 </ul>
               </div>
               <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-border flex items-center justify-center">
-                  <Building2 size={80} className="text-primary/30" />
+                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-dashed border-border flex flex-col items-center justify-center gap-4">
+                  <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <Building2 size={40} className="text-primary/40" />
+                  </div>
+                  <p className="text-muted-foreground/50 text-sm">Image Coming Soon</p>
                 </div>
               </div>
             </div>
@@ -113,22 +94,29 @@ const CommercialLending = () => {
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {offerings.map((item, index) => (
-                <div
-                  key={item.title}
-                  className={`group relative bg-card border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-xl overflow-hidden cursor-pointer hover:border-primary/30 ${
-                    visible ? 'animate-float-up' : 'opacity-0'
-                  }`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="absolute top-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <item.icon size={26} className="text-primary group-hover:text-primary-foreground transition-colors" />
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                </div>
-              ))}
+              {commercialLendingServices.map((item, index) => {
+                const Icon = iconMap[item.slug] || Briefcase;
+                return (
+                  <NavLink
+                    key={item.slug}
+                    to={`/services/commercial-lending/${item.slug}`}
+                    className={`group relative bg-card border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-xl overflow-hidden hover:border-primary/30 block ${
+                      visible ? 'animate-float-up' : 'opacity-0'
+                    }`}
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="absolute top-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                      <Icon size={26} className="text-primary group-hover:text-primary-foreground transition-colors" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">{item.heroDescription}</p>
+                    <div className="flex items-center gap-1 mt-4 text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Learn More <ChevronRight size={16} />
+                    </div>
+                  </NavLink>
+                );
+              })}
             </div>
           </div>
         </section>

@@ -23,6 +23,10 @@ import Mortgage from "./pages/services/Mortgage";
 import CommercialLending from "./pages/services/CommercialLending";
 import Pensions from "./pages/services/Pensions";
 import WillsEstatePlanning from "./pages/services/WillsEstatePlanning";
+import ProtectionSubService from "./pages/services/ProtectionSubService";
+import MortgageSubService from "./pages/services/MortgageSubService";
+import MortgageCalculator from "./pages/services/MortgageCalculator";
+import CommercialLendingSubService from "./pages/services/CommercialLendingSubService";
 
 const queryClient = new QueryClient();
 
@@ -47,11 +51,17 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/complaints-procedure" element={<ComplaintsProcedure />} />
           <Route path="/fair-treatment" element={<FairTreatment />} />
+          {/* Service main pages */}
           <Route path="/services/protection" element={<Protection />} />
           <Route path="/services/mortgage" element={<Mortgage />} />
           <Route path="/services/commercial-lending" element={<CommercialLending />} />
           <Route path="/services/pensions" element={<Pensions />} />
           <Route path="/services/wills-estate-planning" element={<WillsEstatePlanning />} />
+          {/* Service sub-pages */}
+          <Route path="/services/protection/:slug" element={<ProtectionSubService />} />
+          <Route path="/services/mortgage/calculator" element={<MortgageCalculator />} />
+          <Route path="/services/mortgage/:slug" element={<MortgageSubService />} />
+          <Route path="/services/commercial-lending/:slug" element={<CommercialLendingSubService />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
