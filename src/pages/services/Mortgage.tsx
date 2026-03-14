@@ -1,31 +1,17 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyGetInTouch from "@/components/StickyGetInTouch";
-import { Home, Building, Key, RefreshCw, ArrowRight, Calculator, TrendingUp } from "lucide-react";
+import { Home, Building, Key, RefreshCw, ArrowRight, Calculator, TrendingUp, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { mortgageServices } from "@/data/mortgageData";
 
-const offerings = [
-  {
-    icon: Key,
-    title: "Buy To Let Mortgages",
-    description: "Whether you're new to property investment or an experienced landlord, explore the financial freedom offered by buy-to-let mortgages, as well as finding out about eligibility criteria, competitive rates and the lucrative investment opportunities in the property market.",
-  },
-  {
-    icon: Home,
-    title: "Residential Mortgages",
-    description: "Start your journey to home ownership with support from Phoenix Finserv. We work with a wide range of UK lenders to help you find a suitable mortgage and guide you through the process with confidence.",
-  },
-  {
-    icon: Building,
-    title: "First Time Buyer Mortgages",
-    description: "Buying your first home is an exciting step and Phoenix Finserv are here to guide you through it. We'll explain how first-time buyer mortgages work, what to consider when choosing a deal, and the steps involved in the process.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Remortgages",
-    description: "Optimise your finances with remortgages. The Phoenix Finserv team can help you find competitive rates, and flexible terms and offer expert guidance that help you make informed decisions and identifies the most efficient way to achieve your financial goals.",
-  },
-];
+const iconMap: Record<string, React.ElementType> = {
+  "buy-to-let-mortgage": Key,
+  "first-time-buyer-mortgage": Home,
+  "residential-mortgage": Building,
+  "remortgage": RefreshCw,
+};
 
 const Mortgage = () => {
   const [visible, setVisible] = useState(false);
@@ -80,15 +66,18 @@ const Mortgage = () => {
                 </p>
               </div>
               <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-accent/10 to-primary/10 border border-border flex items-center justify-center">
-                  <Home size={80} className="text-accent/30" />
+                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-accent/10 to-primary/10 border-2 border-dashed border-border flex flex-col items-center justify-center gap-4">
+                  <div className="w-20 h-20 rounded-2xl bg-accent/10 flex items-center justify-center">
+                    <Home size={40} className="text-accent/40" />
+                  </div>
+                  <p className="text-muted-foreground/50 text-sm">Image Coming Soon</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Calculators */}
+        {/* Mortgage Calculator */}
         <section className="py-16 bg-gradient-to-br from-phoenix-gray-light/40 to-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-10">
@@ -100,11 +89,14 @@ const Mortgage = () => {
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
-              <div className="bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:border-primary/30 group">
+              <NavLink to="/services/mortgage/calculator" className="bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:border-primary/30 group block">
                 <Calculator size={40} className="text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="font-bold text-lg mb-2">Best Buy Calculator</h3>
-                <p className="text-muted-foreground text-sm">Compare mortgage rates with top lenders and find the deal that's right for you.</p>
-              </div>
+                <h3 className="font-bold text-lg mb-2">Mortgage Calculator</h3>
+                <p className="text-muted-foreground text-sm">Calculate your monthly repayments, compare rates, and find the deal that's right for you.</p>
+                <div className="flex items-center justify-center gap-1 mt-4 text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                  Try Now <ChevronRight size={16} />
+                </div>
+              </NavLink>
               <div className="bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:border-accent/30 group">
                 <TrendingUp size={40} className="text-accent mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="font-bold text-lg mb-2">Rates & Repayments</h3>
@@ -124,22 +116,29 @@ const Mortgage = () => {
               </h2>
             </div>
             <div className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {offerings.map((item, index) => (
-                <div
-                  key={item.title}
-                  className={`group relative bg-card border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-xl overflow-hidden cursor-pointer hover:border-accent/30 ${
-                    visible ? 'animate-float-up' : 'opacity-0'
-                  }`}
-                  style={{ animationDelay: `${index * 0.12}s` }}
-                >
-                  <div className="absolute top-0 left-0 w-full h-1 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <item.icon size={26} className="text-accent group-hover:text-accent-foreground transition-colors" />
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                </div>
-              ))}
+              {mortgageServices.map((item, index) => {
+                const Icon = iconMap[item.slug] || Home;
+                return (
+                  <NavLink
+                    key={item.slug}
+                    to={`/services/mortgage/${item.slug}`}
+                    className={`group relative bg-card border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-xl overflow-hidden hover:border-accent/30 block ${
+                      visible ? 'animate-float-up' : 'opacity-0'
+                    }`}
+                    style={{ animationDelay: `${index * 0.12}s` }}
+                  >
+                    <div className="absolute top-0 left-0 w-full h-1 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                    <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                      <Icon size={26} className="text-accent group-hover:text-accent-foreground transition-colors" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">{item.heroDescription}</p>
+                    <div className="flex items-center gap-1 mt-4 text-accent text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Learn More <ChevronRight size={16} />
+                    </div>
+                  </NavLink>
+                );
+              })}
             </div>
           </div>
         </section>

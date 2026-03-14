@@ -9,56 +9,93 @@ const serviceGroups = [
   {
     name: "Protection",
     href: "/services/protection",
-    items: [
-      { name: "Life Cover", href: "/services/protection" },
-      { name: "Critical Illness", href: "/services/protection" },
-      { name: "Income Protection", href: "/services/protection" },
-      { name: "Keyman Cover", href: "/services/protection" },
-      { name: "Shareholder Protection", href: "/services/protection" },
-      { name: "Relevant Life Cover", href: "/services/protection" },
-      { name: "Business Loan Protection", href: "/services/protection" },
+    columns: [
+      {
+        title: "Personal Protection",
+        items: [
+          { name: "Life Cover", href: "/services/protection/life-cover" },
+          { name: "Critical Illness", href: "/services/protection/critical-illness" },
+          { name: "Income Protection", href: "/services/protection/income-protection" },
+        ],
+      },
+      {
+        title: "Business Protection",
+        items: [
+          { name: "Keyman Cover", href: "/services/protection/keyman-cover" },
+          { name: "Shareholder Protection", href: "/services/protection/shareholder-protection" },
+          { name: "Relevant Life Cover", href: "/services/protection/relevant-life-cover" },
+          { name: "Business Loan Protection", href: "/services/protection/business-loan-protection" },
+        ],
+      },
+      {
+        title: "Home Insurance",
+        items: [
+          { name: "Buildings & Contents", href: "/services/protection/buildings-and-contents" },
+        ],
+      },
     ],
   },
   {
     name: "Mortgage",
     href: "/services/mortgage",
-    items: [
-      { name: "First Time Buyer Mortgages", href: "/services/mortgage" },
-      { name: "Remortgage Advice", href: "/services/mortgage" },
-      { name: "Buy to Let Mortgages", href: "/services/mortgage" },
-      { name: "Residential Mortgages", href: "/services/mortgage" },
+    columns: [
+      {
+        title: "Mortgage Services",
+        items: [
+          { name: "Mortgage Calculators", href: "/services/mortgage/calculator" },
+          { name: "Buy to Let Mortgage", href: "/services/mortgage/buy-to-let-mortgage" },
+          { name: "First Time Buyer Mortgage", href: "/services/mortgage/first-time-buyer-mortgage" },
+          { name: "Residential Mortgage", href: "/services/mortgage/residential-mortgage" },
+          { name: "Remortgage", href: "/services/mortgage/remortgage" },
+        ],
+      },
     ],
   },
   {
     name: "Commercial Lending",
     href: "/services/commercial-lending",
-    items: [
-      { name: "Bridging Loans", href: "/services/commercial-lending" },
-      { name: "Business Finance", href: "/services/commercial-lending" },
-      { name: "Asset Finance", href: "/services/commercial-lending" },
-      { name: "Buy to Let Finance", href: "/services/commercial-lending" },
-      { name: "Commercial Mortgage", href: "/services/commercial-lending" },
-      { name: "Property Development Finance", href: "/services/commercial-lending" },
+    columns: [
+      {
+        title: "Commercial Services",
+        items: [
+          { name: "Bridging Loans", href: "/services/commercial-lending/bridging-loan" },
+          { name: "Business Finance", href: "/services/commercial-lending/business-finance" },
+          { name: "Property Development Finance", href: "/services/commercial-lending/property-development-finance" },
+          { name: "Asset Finance", href: "/services/commercial-lending/asset-finance" },
+          { name: "Buy to Let Finance", href: "/services/commercial-lending/buy-to-let-finance" },
+          { name: "Commercial Mortgage", href: "/services/commercial-lending/commercial-mortgage" },
+        ],
+      },
     ],
   },
   {
     name: "Pensions",
     href: "/services/pensions",
-    items: [
-      { name: "State Pension", href: "/services/pensions" },
-      { name: "Defined Benefits Pensions", href: "/services/pensions" },
-      { name: "Private Pensions", href: "/services/pensions" },
-      { name: "Pension Drawdown", href: "/services/pensions" },
+    columns: [
+      {
+        title: "Pension Services",
+        items: [
+          { name: "State Pension", href: "/services/pensions" },
+          { name: "Defined Benefits Pensions", href: "/services/pensions" },
+          { name: "Private Pensions", href: "/services/pensions" },
+          { name: "Pension Drawdown", href: "/services/pensions" },
+        ],
+      },
     ],
   },
   {
     name: "Wills & Estate Planning",
     href: "/services/wills-estate-planning",
-    items: [
-      { name: "Will Writing", href: "/services/wills-estate-planning" },
-      { name: "Trust Planning", href: "/services/wills-estate-planning" },
-      { name: "Inheritance Tax Planning", href: "/services/wills-estate-planning" },
-      { name: "Lasting Power of Attorney", href: "/services/wills-estate-planning" },
+    columns: [
+      {
+        title: "Estate Planning",
+        items: [
+          { name: "Will Writing", href: "/services/wills-estate-planning" },
+          { name: "Inheritance Tax Planning", href: "/services/wills-estate-planning" },
+          { name: "Trust Planning", href: "/services/wills-estate-planning" },
+          { name: "Lasting Power of Attorney", href: "/services/wills-estate-planning" },
+        ],
+      },
     ],
   },
 ];
@@ -145,7 +182,7 @@ const Header = () => {
                 key={link.name}
                 to={link.href}
                 className={({ isActive }) =>
-                  `px-3 py-2 text-sm font-medium transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap shrink-0 ${
+                  `px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-medium transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap shrink-0 ${
                     isActive ? "text-primary" : "text-foreground hover:text-primary"
                   }`
                 }
@@ -158,7 +195,7 @@ const Header = () => {
             <div className="relative shrink-0" ref={networkRef}>
               <button
                 onClick={() => { setNetworkOpen(!networkOpen); setServicesOpen(false); }}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap"
+                className="flex items-center gap-1 px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap"
               >
                 Join Our Network
                 <ChevronDown size={14} className={`transition-transform duration-300 ${networkOpen ? "rotate-180" : ""}`} />
@@ -183,7 +220,7 @@ const Header = () => {
             <div className="relative shrink-0" ref={servicesRef}>
               <button
                 onClick={() => { setServicesOpen(!servicesOpen); setNetworkOpen(false); }}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap"
+                className="flex items-center gap-1 px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap"
               >
                 Services
                 <ChevronDown size={14} className={`transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
@@ -194,14 +231,14 @@ const Header = () => {
                   className="absolute top-full right-0 mt-1 w-[700px] bg-phoenix-gray-dark rounded-b-xl shadow-2xl border border-border/20 overflow-hidden z-[60]"
                   style={{ animation: 'slideDown 0.3s ease-out' }}
                 >
-                  {/* Service tabs - WealthMax style */}
+                  {/* Service tabs */}
                   <div className="flex border-b border-primary-foreground/10">
                     {serviceGroups.map((group, index) => (
                       <button
                         key={group.name}
                         onMouseEnter={() => setActiveServiceTab(index)}
                         onClick={() => setActiveServiceTab(index)}
-                        className={`flex-1 px-3 py-3 text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                        className={`flex-1 px-2 xl:px-3 py-3 text-xs xl:text-sm font-semibold transition-all whitespace-nowrap ${
                           activeServiceTab === index
                             ? 'bg-primary text-primary-foreground'
                             : 'text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/5'
@@ -212,17 +249,26 @@ const Header = () => {
                     ))}
                   </div>
 
-                  {/* Active tab items */}
+                  {/* Active tab columns */}
                   <div className="p-6" style={{ animation: 'fadeSlideUp 0.25s ease-out' }}>
-                    <div className="space-y-1">
-                      {serviceGroups[activeServiceTab].items.map((item) => (
-                        <NavLink
-                          key={item.name}
-                          to={item.href}
-                          className="block py-2 px-3 text-sm text-primary-foreground/60 hover:text-primary transition-colors hover:translate-x-2 transform duration-200 rounded-md hover:bg-primary-foreground/5"
-                        >
-                          {item.name}
-                        </NavLink>
+                    <div className={`grid gap-8 ${serviceGroups[activeServiceTab].columns.length > 1 ? `grid-cols-${serviceGroups[activeServiceTab].columns.length}` : ''}`}
+                      style={{ gridTemplateColumns: `repeat(${serviceGroups[activeServiceTab].columns.length}, 1fr)` }}
+                    >
+                      {serviceGroups[activeServiceTab].columns.map((col) => (
+                        <div key={col.title}>
+                          <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-3">{col.title}</h4>
+                          <div className="space-y-1">
+                            {col.items.map((item) => (
+                              <NavLink
+                                key={item.name}
+                                to={item.href}
+                                className="block py-2 px-3 text-sm text-primary-foreground/60 hover:text-primary transition-colors hover:translate-x-2 transform duration-200 rounded-md hover:bg-primary-foreground/5"
+                              >
+                                {item.name}
+                              </NavLink>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -237,7 +283,7 @@ const Header = () => {
                 key={link.name}
                 to={link.href}
                 className={({ isActive }) =>
-                  `px-3 py-2 text-sm font-medium transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap shrink-0 ${
+                  `px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-medium transition-colors rounded-md hover:bg-primary/5 whitespace-nowrap shrink-0 ${
                     isActive ? "text-primary" : "text-foreground hover:text-primary"
                   }`
                 }
@@ -328,10 +374,15 @@ const Header = () => {
                         </button>
                         {mobileServiceGroup === group.name && (
                           <div className="ml-4 pl-3 border-l border-accent/20 space-y-1">
-                            {group.items.map((item) => (
-                              <NavLink key={item.name} to={item.href} className="block py-1.5 px-3 text-sm text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                                {item.name}
-                              </NavLink>
+                            {group.columns.map((col) => (
+                              <div key={col.title}>
+                                <p className="px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider">{col.title}</p>
+                                {col.items.map((item) => (
+                                  <NavLink key={item.name} to={item.href} className="block py-1.5 px-3 text-sm text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                                    {item.name}
+                                  </NavLink>
+                                ))}
+                              </div>
                             ))}
                           </div>
                         )}
